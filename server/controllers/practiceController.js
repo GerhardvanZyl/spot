@@ -3,18 +3,24 @@ const PracticeProvider = require('../providers/practiceProvider.js');
 const PracticeModel = require('../model/practice.js');
 
 const router = express.Router();
-const practiceProvider = new PracticeProvider();
 
-router.get('/practice', async (req, res, next) => {
-    let practices = await practiceProvider.retrieveAll();
-
-    res.json(practices);
+router.get('/api/practice', async (req, res, next) => {
+   
+    const practiceProvider = new PracticeProvider();
+    try {
+        let practices = await practiceProvider.retrieveAll();
+        res.status(200).json(practices);
+    } catch (err) {
+        console.error(err);
+        return res.status(400).json(err);
+    }
 });
 
-router.post('/practice', (req, res) => {
+router.post('/practice', async (req, res) => {
 
+    const practiceProvider = new PracticeProvider();
     try {
-        let result = practiceProvider.save({
+        let result = await practiceProvider.save({
             practiceName: req.body.practiceName,
             emailAddresses: req.body.emailAddresses,
             phoneNumbers: req.body.phoneNumbers,
@@ -24,7 +30,8 @@ router.post('/practice', (req, res) => {
 
         res.status(200).json(result);
 
-    } catch (err){
+    } catch (err) {
+        console.error(err);
         return res.status(400).json(err);
     }
 })

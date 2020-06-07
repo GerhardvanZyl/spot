@@ -4,7 +4,7 @@
   "description": "Vetinary blood donation admin",
   "main": "app",
   "scripts": {
-    "test": "jest",
+    "test": "jest --runInBand",
     "test:debug-server": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand",
     "start": "nodemon app.js",
     "start:validate": "npm run lint & nodemon app.js",
@@ -15,9 +15,11 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "mongodb-memory-server": "^6.6.1",
     "mongoose": "^5.9.15",
     "morgan": "^1.10.0",
-    "os": "^0.1.1"
+    "os": "^0.1.1",
+    "supertest": "^4.0.2"
   },
   "devDependencies": {
     "@shelf/jest-mongodb": "^1.1.5",
@@ -25,9 +27,15 @@
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
     "jest": "^26.0.1",
+    "mockingoose": "^2.13.2",
     "nodemon": "^2.0.4"
   },
-  "jest": { 
+  "jest": {
     "testEnvironment": "node"
+  },
+  "config": {
+    "mongodbMemoryServer": {
+      
+    }
   }
 }

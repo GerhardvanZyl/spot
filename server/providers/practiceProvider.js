@@ -1,29 +1,33 @@
 const PracticeModel = require('../model/practice.js');
 
 class PracticeProvider {
+    /**
+     * Retrieves all the practices and their details
+     */
     retrieveAll() {
         return new Promise((resolve, reject) => {
             let query = PracticeModel.find({});
 
-            query.exec((err, result)=>{
-                if(err){
+            query.exec((err, result) => {
+                if (err) {
                     reject(err);
                 } else {
-                    console.log(result);
-                    resolve({
-                        practiceName: result[0].practiceName,
-                        emailAddresses: result[0].emailAddresses,
-                        phoneNumbers: result[0].phoneNumbers,
-                        address: result[0].address,
-                        patients: result[0].patients
-                    });
+                    const returnValue = [];
+
+                    for (let res of result) {
+                        returnValue.push({
+                            practiceName: res.practiceName,
+                            emailAddresses: res.emailAddresses,
+                            phoneNumbers: res.phoneNumbers,
+                            address: res.address,
+                            patients: res.patients
+                        })
+                    }
+
+                    resolve(returnValue);
                 }
             });
         });
-    }
-
-    find(){
-
     }
 
     /**
@@ -40,12 +44,12 @@ class PracticeProvider {
         });
 
         return new Promise((resolve, reject) => {
-            
+
             practiceModel.save((err, result) => {
                 if (err) {
                     reject(err);
                 }
-                console.log(result);
+
                 resolve({
                     practiceName: result.practiceName,
                     emailAddresses: result.emailAddresses,
