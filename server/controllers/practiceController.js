@@ -16,7 +16,7 @@ router.get('/api/practice', async (req, res, next) => {
     }
 });
 
-router.post('/practice', async (req, res) => {
+router.post('/api/practice', async (req, res) => {
 
     const practiceProvider = new PracticeProvider();
     try {
