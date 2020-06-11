@@ -1,0 +1,26 @@
+<div class="container">
+    <h2>Practice</h2>
+
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" name="name" class="form-control" placeholder="Practice Name" [(ngModel)]="practice.name" required #nameField="ngModel"/>
+            <div [hidden]="nameField.valid || nameField.untouched" class="alert alert-danger">Enter a practice name</div>
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address</label>
+            <textarea id="address" name="address" class="form-control" placeholder="Practice Address" rows="4" [(ngModel)]="practice.address" 
+                required #addressField="ngModel"></textarea>
+            <div [hidden]="addressField.valid || addressField.untouched" class="alert alert-danger">Enter a practice address</div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <button class="btn btn-primary">Save</button>
+            </div>
+            <div class="col-sm">
+                <button class="btn btn-primary">Edit</button>
+            </div>
+        </div>
+    </form>
+</div>
