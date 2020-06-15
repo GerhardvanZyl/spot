@@ -16,12 +16,25 @@ router.get('/api/practice', async (req, res, next) => {
     }
 });
 
+router.get('/api/practice/id/:id', async (req, res, next) => {
+   
+    const practiceProvider = new PracticeProvider();
+    try {
+        console.log(req.params["id"]);
+        let practices = await practiceProvider.retrieveById(req.params["id"]);
+        res.status(200).json(practices);
+    } catch (err) {
+        console.error(err);
+        return res.status(400).json(err);
+    }
+});
+
 router.post('/api/practice', async (req, res) => {
 
     const practiceProvider = new PracticeProvider();
     try {
         let result = await practiceProvider.save({
-            practiceName: req.body.practiceName,
+            name: req.body.name,
             emailAddresses: req.body.emailAddresses,
             phoneNumbers: req.body.phoneNumbers,
             address: req.body.address,

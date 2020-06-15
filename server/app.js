@@ -4,15 +4,19 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const practiceController = require('./controllers/practiceController.js');
+const cors = require('cors');
 
 const port = process.env.PORT || 3000;
 const interfaces = os.networkInterfaces();
-
+const corsOptions = {
+    origin: /localhost.+/
+}
 const app = express();
+app.use(cors(corsOptions));
 
 let listener;
 
-const startServer = () => {
+const startServer = (app) => {
     let usableInterfaces = {};
 
     for (const name in interfaces) {
@@ -29,16 +33,19 @@ const startServer = () => {
 
     app.use('/', practiceController);
 
-    // mongoose.connect('mongodb://localhost:27017/practice');
-    // const db = mongoose.connection;
-    
-    // db.on('error', (err) => {
-    //     console.error('Error connecting to DB: ', err);
-    // });
+    app.use(express.static('wwwroot'));
 
-    // db.once('open', () => {
-    //     console.log("DB connection open");
-    // });
+    // TODO: Don't start for unit tests
+    mongoose.connect('mongodb://localhost:27017/practice');
+    const db = mongoose.connection;
+    
+    db.on('error', (err) => {
+        console.error('Error connecting to DB: ', err);
+    });
+
+    db.once('open', () => {
+        console.log("DB connection open");
+    });
 
     listener = app.listen(port, () => {
         console.log(`Listening on http://127.0.0.1:${port}`);
@@ -48,7 +55,7 @@ const startServer = () => {
     });
 };
 
-startServer();
+startServer(app);
 
 module.exports = {
     app: app,

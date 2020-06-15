@@ -4,10 +4,11 @@
   "description": "Vetinary blood donation admin",
   "main": "app",
   "scripts": {
-    "test": "jest --runInBand",
-    "test:debug-server": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand",
-    "start": "nodemon app.js",
-    "start:validate": "npm run lint & nodemon app.js",
+    "test": "jest server --runInBand",
+    "test:debug-server": "node --inspect-brk ./server/node_modules/jest/bin/jest.js --runInBand",
+    "start:debug": "node --inspect-brk ./server/app.js --runInBand",
+    "start": "nodemon server/app.js",
+    "start:validate": "npm run lint & nodemon server/app.js",
     "lint": "eslint ."
   },
   "author": "Gerhard van Zyl",
@@ -15,6 +16,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "bootstrap": "^4.5.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongodb-memory-server": "^6.6.1",
     "mongoose": "^5.9.15",
