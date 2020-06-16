@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const practiceController = require('./controllers/practice-controller.js');
 const cors = require('cors');
-const config = require('providers/config-provider.js');
+const config = require('./providers/config-provider.js');
 
 const port = config.port || 3000;
 const interfaces = os.networkInterfaces();
