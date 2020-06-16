@@ -1,5 +1,5 @@
 const express = require('express');
-const PracticeProvider = require('../providers/practiceProvider.js');
+const PracticeProvider = require('../providers/practice-provider.js');
 const PracticeModel = require('../model/practice.js');
 
 const router = express.Router();
