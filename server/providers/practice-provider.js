@@ -38,7 +38,7 @@ class PracticeProvider {
         });
     }
 
-    retrieveById(id) {
+    findById(id) {
         return new Promise((resolve, reject) => {
             let query = PracticeModel.findById(id);
 

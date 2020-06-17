@@ -5,7 +5,7 @@
   "main": "app",
   "scripts": {
     "test": "jest server --runInBand",
-    "test:debug-server": "node --inspect-brk ./server/node_modules/jest/bin/jest.js --runInBand",
+    "test:debug-server": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand",
     "start:debug": "node --inspect-brk ./server/app.js --runInBand",
     "start": "nodemon server/app.js",
     "start:validate": "npm run lint & nodemon server/app.js",

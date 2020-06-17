@@ -4,6 +4,7 @@ import { IPractice } from '../model/Ipractice';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { IPracticeViewModel } from '../view-model/Ipractice-viewmodel';
+import { ThrowStmt } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,10 @@ import { IPracticeViewModel } from '../view-model/Ipractice-viewmodel';
 export class DataService {
 
   constructor(private _http: HttpClient) { }
+
+  getConfig(): Observable<any>{
+    return this._http.get(`${environment.apiUrl}/api/configuration`);
+  }
 
   getPractices(): Observable<any> {
     return this._http.get(`${environment.apiUrl}/api/practice`);

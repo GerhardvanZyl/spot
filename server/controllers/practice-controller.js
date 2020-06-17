@@ -21,7 +21,7 @@ router.get('/api/practice/id/:id', async (req, res, next) => {
     const practiceProvider = new PracticeProvider();
     try {
         console.log(req.params["id"]);
-        let practices = await practiceProvider.retrieveById(req.params["id"]);
+        let practices = await practiceProvider.findById(req.params["id"]);
         res.status(200).json(practices);
     } catch (err) {
         console.error(err);

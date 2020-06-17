@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const practiceController = require('./controllers/practice-controller.js');
 const cors = require('cors');
 const config = require('./providers/config-provider.js');
+const path = require('path');
 
 const port = config.port || 3000;
 const interfaces = os.networkInterfaces();
@@ -16,9 +17,14 @@ const corsOptions = {
 const app = express();
 app.use(cors(corsOptions));
 
+const isUnitTesting = process.argv[1].indexOf('node_modules\\jest\\bin\\jest.js') > -1;
+
 let listener;
 
 const startServer = (app) => {
+
+    app.use(express.static(path.join(__dirname, 'wwwroot')));
+
     let usableInterfaces = {};
 
     for (const name in interfaces) {
@@ -35,19 +41,21 @@ const startServer = (app) => {
 
     app.use('/', practiceController);
 
-    app.use(express.static('wwwroot'));
+    if (!isUnitTesting) {
+        mongoose.connect(config.db_connection, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
+        const db = mongoose.connection;
 
-    // TODO: Don't start for unit tests
-    mongoose.connect(config.db_connection);
-    const db = mongoose.connection;
-    
-    db.on('error', (err) => {
-        console.error('Error connecting to DB: ', err);
-    });
+        db.on('error', (err) => {
+            console.error('Error connecting to DB: ', err);
+        });
 
-    db.once('open', () => {
-        console.log("DB connection open");
-    });
+        db.once('open', () => {
+            console.log("DB connection open");
+        });
+    }
 
     listener = app.listen(port, () => {
         console.log(`Listening on http://127.0.0.1:${port}`);
