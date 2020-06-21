@@ -28,4 +28,8 @@ export class DataService {
   postPractice(practice: IPracticeViewModel): Observable<any> {
     return this._http.post(`${environment.apiUrl}/api/practice`, practice);
   }
+
+  login(username: String, password: String):Observable<any>{
+    return this._http.post(`${environment.apiUrl}/api/authenticate`, {username: username, password: password });
+  }
 }

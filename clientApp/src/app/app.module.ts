@@ -9,6 +9,8 @@ import { PracticeComponent } from './ui-components/practice/practice.component';
 import { PracticesComponent } from './ui-components/practices/practices.component';
 import { DonorsComponent } from './ui-components/donors/donors.component';
 import { DonorComponent } from './ui-components/donor/donor.component';
+import { LoginComponent } from './ui-components/login/login.component';
+import { RootComponent } from './ui-components/root/root.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { DonorComponent } from './ui-components/donor/donor.component';
     PracticeComponent,
     PracticesComponent,
     DonorsComponent,
-    DonorComponent
+    DonorComponent,
+    LoginComponent,
+    RootComponent
   ],
   imports: [
     BrowserModule,

@@ -46,24 +46,27 @@ class PracticeProvider {
                 if (err) {
                     reject(err);
                 } else {
-
-                    const returnValue = {
-                        id: res._id.toString(),
-                        name: res.name,
-                        emailAddresses: res.emailAddresses,
-                        phoneNumbers: res.phoneNumbers,
-                        address: {
-                            line1: res.address?.line1,
-                            line2: res.address?.line2,
-                            suburb: res.address?.suburb,
-                            city: res.address?.city,
-                            province: res.address?.province,
-                            postalCode: res.address?.postalCode
-                        },
-                        patients: res.patients
-                    };
-
-                    resolve(returnValue);
+                    if (!res) {
+                        resolve(null);
+                    } else {
+                        const returnObj = {
+                            id: res._id.toString(),
+                            name: res.name,
+                            emailAddresses: res.emailAddresses,
+                            phoneNumbers: res.phoneNumbers,
+                            address: {
+                                line1: res.address?.line1,
+                                line2: res.address?.line2,
+                                suburb: res.address?.suburb,
+                                city: res.address?.city,
+                                province: res.address?.province,
+                                postalCode: res.address?.postalCode
+                            },
+                            patients: res.patients
+                        };
+                    
+                        resolve(returnObj);
+                    }
                 }
             });
         });

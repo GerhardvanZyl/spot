@@ -1,10 +1,11 @@
 const express = require('express');
 const PracticeProvider = require('../providers/practice-provider.js');
 const PracticeModel = require('../model/practice.js');
+const authProvivder = require('../providers/auth-povider.js');
 
 const router = express.Router();
 
-router.get('/api/practice', async (req, res, next) => {
+router.get('/', authProvivder.authenticationCheck, async (req, res, next) => {
    
     const practiceProvider = new PracticeProvider();
     try {
@@ -16,20 +17,22 @@ router.get('/api/practice', async (req, res, next) => {
     }
 });
 
-router.get('/api/practice/id/:id', async (req, res, next) => {
+router.get('/id/:id', authProvivder.authenticationCheck, async (req, res, next) => {
    
     const practiceProvider = new PracticeProvider();
     try {
         console.log(req.params["id"]);
         let practices = await practiceProvider.findById(req.params["id"]);
-        res.status(200).json(practices);
+
+        if(!practices) res.status(404).json({});
+        else res.status(200).json(practices);
     } catch (err) {
         console.error(err);
         return res.status(400).json(err);
     }
 });
 
-router.post('/api/practice', async (req, res) => {
+router.post('/', authProvivder.authenticationCheck, async (req, res) => {
 
     const practiceProvider = new PracticeProvider();
     try {

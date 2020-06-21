@@ -221,5 +221,11 @@ describe('PracticeProvider', () => {
             expect(retrievalResult3.address.postalCode).toEqual(sourcePractice3.address.postalCode);
         });
 
+        it('should return null if the Id does not exist', async ()=>{
+            let practiceProvider = new PracticeProvider();
+            let retrievalResult1 = await practiceProvider.findById('5ee62f0935caf454f0d521e6');
+            expect(retrievalResult1).toBe(null);
+        });
+
     });
 });

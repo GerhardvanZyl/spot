@@ -74,7 +74,6 @@ describe('PracticeController', () => {
         }
     };
 
-
     beforeAll(async () => {
         await startMongoose();
     });
@@ -163,6 +162,37 @@ describe('PracticeController', () => {
             const response = responseObj.body;
 
             expect(response.length).toEqual(0);
+        });
+    });
+
+    describe('get:id', () => {
+        it('should return the value with the specified Id', async () => {
+            let practiceProvider = new PracticeProvider();
+
+            await practiceProvider.save(sourcePractice1);
+            const source2 = await practiceProvider.save(sourcePractice2);
+
+            const responseObj = await request(server.app).get(`/api/practice/id/${source2.id}`);
+            const response = responseObj.body;
+
+            expect(response.name).toEqual(sourcePractice2.name);
+            expect(response.emailAddresses[0].value).toEqual(sourcePractice2.emailAddresses[0].value);
+            expect(response.phoneNumbers[0].value).toEqual(sourcePractice2.phoneNumbers[0].value);
+            expect(response.address.line1).toEqual(sourcePractice2.address.line1);
+            expect(response.address.line2).toEqual(sourcePractice2.address.line2);
+            expect(response.address.suburb).toEqual(sourcePractice2.address.suburb);
+            expect(response.address.city).toEqual(sourcePractice2.address.city);
+            expect(response.address.province).toEqual(sourcePractice2.address.province);
+            expect(response.address.postalCode).toEqual(sourcePractice2.address.postalCode);
+        });
+
+        it('should return a 404 code if the specified Id was not found', async ()=>{
+
+            let practiceProvider = new PracticeProvider();
+            await practiceProvider.save(sourcePractice1);
+
+            const responseObj = await request(server.app).get('/api/practice/id/5ee62f0935caf454f0d521e6');
+            expect(responseObj.statusCode).toEqual(404);
         });
     });
 

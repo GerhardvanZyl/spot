@@ -1,5 +1,5 @@
 const google = require('googleapis');
-const config = require('./config-provider');
+const config = require('../config-provider');
 
 const defaultScope = [
     'https://www.googleapis.com/auth/plus.me',
