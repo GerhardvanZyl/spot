@@ -8,5 +8,6 @@ module.exports = {
         redirect: process.env.REDIRECT
     },
     db_connection: process.env.DB_CONNECTION,
-    port: process.env.PORT
+    port: process.env.PORT,
+    cookieKey: process.env.COOKIEKEY
 }

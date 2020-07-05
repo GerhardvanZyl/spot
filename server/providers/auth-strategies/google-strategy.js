@@ -1,26 +1,37 @@
-const google = require('googleapis');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const config = require('../config-provider');
 
-const defaultScope = [
-    'https://www.googleapis.com/auth/plus.me',
-    'https://www.googleapis.com/auth/userinfo.email',
-];
+function extractProfile(profile){
+    let imageUrl = '';
 
-function createConnection(){
-    return new google.oauth2_v2.createConnection(config.googleAuthConfig);
+    if(profile.photos && profile.photos.length){
+        imageUrl = profile.photos[0].value;
+    }
+
+    return {
+        id: profile.id,
+        displayName: profile.displayName,
+        image: imageUrl
+    };
 }
 
-function getConnectionUrl(auth){
-    return auth.generateAuthUrl({
-        access_type:'offline',
-        prompt:'consent',
-        scope:defaultScope
-    });
-}
+passport.use(new GoogleStrategy({
+    clientID: config.googleAuthConfig.clientId,
+    clientSecret: config.googleAuthConfig.clientSecret,
+    callbackURL: config.googleAuthConfig.redirect,
+    accessType: 'offline',
+    userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo'
+},
+(accessToken, refreshToken, profile, done) => {
+    done(null, extractProfile(profile));
+}));
 
-module.exports = function createClientGoogleUrl(){
-    const auth = createConnection();
-    const url = getConnectionUrl(auth);
-    return url;
-}
+passport.serializeUser((user, done) => {
+    done(null, user);
+});
+
+passport.deserializeUser((user, done)=>{
+    done(null, user)
+});
 

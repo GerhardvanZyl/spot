@@ -2,6 +2,7 @@ const express = require('express');
 const PracticeProvider = require('../providers/practice-provider.js');
 const PracticeModel = require('../model/practice.js');
 const authProvivder = require('../providers/auth-povider.js');
+const passport = require('passport');
 
 const router = express.Router();
 

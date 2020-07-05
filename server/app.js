@@ -10,6 +10,8 @@ const config = require('./providers/config-provider.js');
 const path = require('path');
 const passport = require('passport');
 const authProvider = require('./providers/auth-povider.js');
+const googleStrategy = require('./providers/auth-strategies/google-strategy');
+const cookieSession = require('cookie-session');
 
 //const LocalStrategy = require('passport-local');
 
@@ -31,10 +33,8 @@ function startServer(app) {
 console.log('start');
 
     app.use(cors({
-        origin: /localhost.+/
+        origin: [/localhost.+/,/vaaccs.com.+/]
     }));
-
-    
 
     app.use(express.static(path.join(__dirname, 'wwwroot')));
 
@@ -42,11 +42,20 @@ console.log('start');
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
 
+    app.use(cookieSession({
+        maxAge: 24*60*60*100,
+        keys: [config.cookieKey]
+    }));
+
     app.use(passport.initialize());
     app.use(passport.session());
 
     app.use('/api/practice', practiceController);
-    app.use('/api/authenticate', authenticationController);
+    app.use('/authentication', authenticationController);
+
+    app.get('/*', (req, res )=>{
+        res.sendFile(__dirname + '/wwwroot/index.html');
+    });
 
     connectDB();
 

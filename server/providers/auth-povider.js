@@ -14,32 +14,25 @@ module.exports = authProvider = {
         done(null, id);
     },
     authenticate: (req, res, next) => {
-        return (req, res, next) => {
-            passport.authenticate('local', (error, user, info) => {
+        passport.authenticate('local', (error, user, info) => {
+            if (error) {
+                res.status(400).json({ statusCode: 400, message: 'User not authenticated' });
+            }
+
+            req.login(user, (error) => {
                 if (error) {
-                    res.status(400).json({ statusCode: 400, message: 'User not authenticated' });
+                    return next(error);
                 }
 
-                req.login(user, (error) => {
-                    if (error) {
-                        return next(error);
-                    }
-
-                    next();
-                });
-            })(req, res, next);
-        }
+                next();
+            });
+        })(req, res, next);
     },
     authenticationCheck: (req, res, next) => {
-
-        // For now just go pass
-        return next();
-
-        // if(req.isAuthenticated()){
-        //     return next()
-        // }
-
-        // return res.status(400).json({statusCode: 400, message: 'not authenticated'});
+        if(req.user){
+            return next();
+        }
+        res.status(401).json({message: "Unauthorized"});
     }
 }
 

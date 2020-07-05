@@ -18,11 +18,12 @@ export class AuthService {
     return false;
   }
 
+  // TODO: when authenticated, should set the user info
   public setUserInfo(user){
     localStorage.setItem('userInfo', JSON.stringify(user));
   }
 
-  public validate(email, password){
-    return this._dataService.login(email, password).toPromise();
-  }
+  // public validate(email, password){
+  //   return this._dataService.login(email, password).toPromise();
+  // }
 }
