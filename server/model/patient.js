@@ -7,7 +7,7 @@ const patientSchema = new mongoose.Schema({
     owners: [ownerSchema],
     isBloodDonor: {type: Boolean},
     bloodType: {type: String},
-    practiceid: {type: Number}
+    practiceid: {type: String}
 });
 
 module.exports = PatientModel = mongoose.model('Patient', patientSchema);

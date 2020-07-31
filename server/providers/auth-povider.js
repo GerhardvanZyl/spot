@@ -1,10 +1,8 @@
-const localStrategy = require('./auth-strategies/local-strategy.js');
 const passport = require('passport');
-
-console.log('auth provider');
+const googleStrategy = require('./auth-strategies/google-strategy');
+const config = require('./config-provider');
 
 module.exports = authProvider = {
-    strategy: localStrategy,
     serializer: (user, done) => {
         if (user) {
             done(null, user);
@@ -14,9 +12,19 @@ module.exports = authProvider = {
         done(null, id);
     },
     authenticate: (req, res, next) => {
-        passport.authenticate('local', (error, user, info) => {
+        if(config.authMode === "dev") {
+            req.login(user, (error) => {
+                if (error) {
+                    return next(error);
+                }
+
+                next();
+            });
+        }
+
+        passport.authenticate('google', (error, user, info) => {
             if (error) {
-                res.status(400).json({ statusCode: 400, message: 'User not authenticated' });
+                res.status(401).json({ statusCode: 401, message: 'User not authenticated' });
             }
 
             req.login(user, (error) => {
@@ -29,13 +37,22 @@ module.exports = authProvider = {
         })(req, res, next);
     },
     authenticationCheck: (req, res, next) => {
-        if(req.user){
+
+        if(config.authMode === "dev") {
+            return next();
+        }
+        
+        // For now only dev test account
+        // TODO: move to env var
+        if(req?.user?.id === "106479279514574710141"){
             return next();
         }
         res.status(401).json({message: "Unauthorized"});
+    },
+    getSessionInfo: (req, res) => {
+        return req.user;
     }
 }
 
-passport.use(authProvider.strategy);
 passport.serializeUser(authProvider.serializer);
 passport.deserializeUser(authProvider.deserializer);

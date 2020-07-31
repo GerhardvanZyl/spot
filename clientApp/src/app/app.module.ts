@@ -11,6 +11,8 @@ import { DonorsComponent } from './ui-components/donors/donors.component';
 import { DonorComponent } from './ui-components/donor/donor.component';
 import { LoginComponent } from './ui-components/login/login.component';
 import { RootComponent } from './ui-components/root/root.component';
+import { PatientsComponent } from './ui-components/patients/patients.component';
+import { PatientComponent } from './ui-components/patient/patient.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { RootComponent } from './ui-components/root/root.component';
     DonorsComponent,
     DonorComponent,
     LoginComponent,
-    RootComponent
+    RootComponent,
+    PatientsComponent,
+    PatientComponent
   ],
   imports: [
     BrowserModule,

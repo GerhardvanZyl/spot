@@ -9,5 +9,6 @@ module.exports = {
     },
     db_connection: process.env.DB_CONNECTION,
     port: process.env.PORT,
-    cookieKey: process.env.COOKIEKEY
+    cookieKey: process.env.COOKIEKEY,
+    authMode: process.env.AUTH_MODE ?? "google"
 }

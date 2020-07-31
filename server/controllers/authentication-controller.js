@@ -16,7 +16,11 @@ router.get('/login', passport.authenticate('google', {
 
 router.get('/verify', passport.authenticate('google'), (req, res, next)=>{
     console.log("redirect url hit");
-    res.redirect("http://vaaccs.com/practices");
+    res.redirect("/practices");
 });
+
+router.get('/sessionInfo', authProvider.authenticationCheck, (req, res, next) => {
+    res.json(authProvider.getSessionInfo(req, res));
+} );
 
 module.exports = router;

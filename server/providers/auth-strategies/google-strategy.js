@@ -35,3 +35,4 @@ passport.deserializeUser((user, done)=>{
     done(null, user)
 });
 
+exports 

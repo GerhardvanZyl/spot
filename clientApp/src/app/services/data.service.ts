@@ -13,10 +13,17 @@ export class DataService {
 
   constructor(private _http: HttpClient) { }
 
+  // Session
+  getSessionInfo(): Observable<any>{
+    return this._http.get(`${environment.apiUrl}/authentication/sessionInfo`);
+  }
+
+  //Config
   getConfig(): Observable<any>{
     return this._http.get(`${environment.apiUrl}/api/configuration`);
   }
 
+  //Practices
   getPractices(): Observable<any> {
     return this._http.get(`${environment.apiUrl}/api/practice`);
   }
@@ -29,7 +36,30 @@ export class DataService {
     return this._http.post(`${environment.apiUrl}/api/practice`, practice);
   }
 
-  // login(username: String, password: String):Observable<any>{
-  //   return this._http.post(`${environment.apiUrl}/authentication/login`, {username: username, password: password });
-  // }
+  deletePractice(id: string): Observable<any> {
+    return this._http.delete(`${environment.apiUrl}/api/practice/id/${id}`);
+  }
+
+  // Patients
+  getPatients(): Observable<any> {
+    return this._http.get(`${environment.apiUrl}/api/patient`);
+  }
+
+  getPatientById(id:string): Observable<any> {
+    return this._http.get(`${environment.apiUrl}/api/patient/id/${id}`);
+  }
+
+  postPatient(practice: IPracticeViewModel): Observable<any> {
+    return this._http.post(`${environment.apiUrl}/api/patient`, practice);
+  }
+
+  deletePatient(id: string): Observable<any> {
+    return this._http.delete(`${environment.apiUrl}/api/patient/id/${id}`);
+  }
+
+  // Donors
+  getDonors(): Observable<any> {
+    return this._http.get(`${environment.apiUrl}/api/donor`);
+  }
+
 }

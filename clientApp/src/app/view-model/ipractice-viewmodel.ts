@@ -8,5 +8,6 @@ export interface IPracticeViewModel {
     defaultEmail: string,
     defaultPhone: string,
     emailAddresses: IContactInfo[],
-    phoneNumbers: IContactInfo[]
+    phoneNumbers: IContactInfo[],
+    broadLocation: string
 }

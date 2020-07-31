@@ -4,13 +4,13 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const practiceController = require('./controllers/practice-controller.js');
+const patientController = require('./controllers/patient-controller.js');
 const authenticationController = require('./controllers/authentication-controller.js');
 const cors = require('cors');
 const config = require('./providers/config-provider.js');
 const path = require('path');
 const passport = require('passport');
 const authProvider = require('./providers/auth-povider.js');
-const googleStrategy = require('./providers/auth-strategies/google-strategy');
 const cookieSession = require('cookie-session');
 
 //const LocalStrategy = require('passport-local');
@@ -51,6 +51,7 @@ console.log('start');
     app.use(passport.session());
 
     app.use('/api/practice', practiceController);
+    app.use('/api/patient', patientController);
     app.use('/authentication', authenticationController);
 
     app.get('/*', (req, res )=>{
@@ -82,7 +83,6 @@ function connectDB() {
             console.log("DB connection open");
         });
     }
-
 }
 
 function listNetworkInterfaces() {

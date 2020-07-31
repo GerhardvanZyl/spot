@@ -8,22 +8,31 @@ export class AuthService {
 
   constructor(private _dataService: DataService) { }
 
-  public isAuthenticated():Boolean {
+  public async isAuthenticated(): Promise<Boolean> {
     let userData = localStorage.getItem('userInfo');
 
-    if(userData && JSON.parse(userData)){
+    if (userData && JSON.parse(userData)) {
       return true;
+    }
+
+    try {
+      userData = await this._dataService.getSessionInfo().toPromise();
+
+      if (userData) {
+        this.setUserInfo(userData);
+        return true;
+      }
+    } catch (err) {
+      return false;
     }
 
     return false;
   }
 
-  // TODO: when authenticated, should set the user info
-  public setUserInfo(user){
+  public setUserInfo(user) {
+    console.log("userinfo:");
+    console.log(user);
     localStorage.setItem('userInfo', JSON.stringify(user));
   }
 
-  // public validate(email, password){
-  //   return this._dataService.login(email, password).toPromise();
-  // }
 }

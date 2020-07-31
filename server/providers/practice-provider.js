@@ -1,4 +1,4 @@
-const PracticeModel = require('../model/practice.js');
+const PracticeModel = require('../model/practice');
 
 class PracticeProvider {
     /**
@@ -116,6 +116,21 @@ class PracticeProvider {
                     },
                     patients: result.patients
                 });
+            });
+        });
+    }
+
+    delete(id){
+        return new Promise((resolve, reject) => {
+            PracticeModel.deleteOne({_id: id}, (err, result) => {
+                if(err) {
+                    reject(err);
+                }
+
+                console.log('delete result in provider:');
+                console.log(result);
+
+                resolve(result);
             });
         });
     }
