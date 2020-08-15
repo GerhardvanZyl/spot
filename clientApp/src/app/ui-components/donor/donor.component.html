@@ -1,1 +1,59 @@
-<p>donor works!</p>
+<div class="container">
+    <h2>Donor</h2>
+
+    TODO: Fix up validation
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" name="name" class="form-control" placeholder="Donor Name" [(ngModel)]="donor.name"
+                required #nameField="ngModel" />
+            <div [hidden]="nameField.valid || nameField.untouched" class="alert alert-danger">Enter a Donor name
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="owner">Owner Name</label>
+            <input id="owner" name="owner" class="form-control" placeholder="Donor Name" [(ngModel)]="donor.ownerName"
+                required #nameField="ngModel" />
+            <div [hidden]="nameField.valid || nameField.untouched" class="alert alert-danger">Enter an owner name
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="surname">Surname</label>
+            <input id="surname" name="surname" class="form-control" placeholder="Surname" [(ngModel)]="donor.surname"
+                required #nameField="ngModel" />
+            <div [hidden]="nameField.valid || nameField.untouched" class="alert alert-danger">Enter a surname
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input class="form-control" name="email" placeholder="Email Address"
+                [(ngModel)]="donor.email" required />
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input class="form-control" name="phone" placeholder="Phone Number"
+                [(ngModel)]="donor.phone" required />
+        </div>
+
+        <div class="form-group">
+            <label for="practice">Practice</label>
+            <input type="text" class="form-control" name="practice" [(ngModel)]="donor.practiceName">
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+                <button class="btn btn-primary">Save</button>
+            </div>
+            <div class="col-sm">
+                <button class="btn btn-primary">Edit</button>
+            </div>
+            <div class="col-sm">
+                <button class="btn btn-primary" type="button" (click)="delete(donor.id)">Delete</button>
+            </div>
+        </div>
+    </form>
+</div>

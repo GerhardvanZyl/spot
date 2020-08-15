@@ -3,8 +3,8 @@
     <div class="row" *ngFor="let donor of donors" [routerLink]="['/donor/', donor.id]" routerLinkActive="active">
         <div class="col-sm">{{donor.name}}</div>
         <div class="col-sm">{{donor.surname}}</div>
-        <div class="col-sm">{{donor.owners[0].firstName}}</div>
-        <div class="col-sm">{{donor.owners[0].phoneNumbers[0].value</div>
-        <div class="col-sm">{{donor.owners[0].emailAddresses[0].value</div>
+        <div class="col-sm">{{donor.ownerName}}</div>
+        <div class="col-sm">{{donor.emailAddress}}</div>
+        <div class="col-sm">{{donor.phoneNumber}}</div>
     </div>
 </div>

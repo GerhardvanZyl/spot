@@ -33,16 +33,33 @@ router.get('/id/:id', authProvivder.authenticationCheck, async (req, res, next) 
     }
 });
 
+router.get('/:key/:value',  authProvivder.authenticationCheck, async (req, res, next) => {
+    const patientProvider = new PatientProvider();
+    try {
+        console.log(req.params['key'], ' ', req.params['value']);
+
+        let patients = await patientProvider.findByProperty(req.params['key'], req.params['value']);
+
+        if(!patients) res.status(404).json({});
+        else res.status(200).json(patients);
+    } catch (err) {
+        console.error(err);
+        return res.status(400).json(err);
+    }
+});
+
 router.post('/', authProvivder.authenticationCheck, async (req, res, next) => {
     const patientProvider = new PatientProvider();
     try {
         let result = await patientProvider.save({
+            id: req.body.id,
             name: req.body.name,
             surname: req.body.surname,
             owners: req.body.owners,
             isBloodDonor: req.body.isBloodDonor,
             bloodType: req.body.bloodType,
-            practiceId: req.body.practiceId
+            practiceId: req.body.practiceId,
+            lastBloodDonationDate: req.body.lastBloodDonationDate
         });
 
         res.status(200).json(result);

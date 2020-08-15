@@ -6,8 +6,8 @@ const mongoose = require('mongoose');
 const practiceSchema = new mongoose.Schema({
     _id: { type: mongoose.Schema.ObjectId, auto:true },
     name: { type: String },
-    emailAddresses: [contactInfoSchema],
-    phoneNumbers: [contactInfoSchema],
+    emailAddresses: [{type:String}],
+    phoneNumbers: [{type:String}],
     address: { type: addressSchema }
 });
 

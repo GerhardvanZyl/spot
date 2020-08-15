@@ -3,8 +3,9 @@ import { Observable, of } from 'rxjs';
 import { IPractice } from '../model/Ipractice';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { IPracticeViewModel } from '../view-model/Ipractice-viewmodel';
+import { IPracticeViewModel } from '../view-model/ipractice.viewmodel';
 import { ThrowStmt } from '@angular/compiler';
+import { IPatient } from '../model/ipatient';
 
 @Injectable({
   providedIn: 'root'
@@ -28,11 +29,11 @@ export class DataService {
     return this._http.get(`${environment.apiUrl}/api/practice`);
   }
 
-  getPracticeById(id:string): Observable<any> {
-    return this._http.get(`${environment.apiUrl}/api/practice/id/${id}`);
+  getPracticeById(id:string): Observable<IPractice> {
+    return this._http.get(`${environment.apiUrl}/api/practice/id/${id}`) as Observable<IPractice>;
   }
 
-  postPractice(practice: IPracticeViewModel): Observable<any> {
+  postPractice(practice: IPractice): Observable<any> {
     return this._http.post(`${environment.apiUrl}/api/practice`, practice);
   }
 
@@ -49,7 +50,7 @@ export class DataService {
     return this._http.get(`${environment.apiUrl}/api/patient/id/${id}`);
   }
 
-  postPatient(practice: IPracticeViewModel): Observable<any> {
+  postPatient(practice: IPatient): Observable<any> {
     return this._http.post(`${environment.apiUrl}/api/patient`, practice);
   }
 
@@ -57,9 +58,8 @@ export class DataService {
     return this._http.delete(`${environment.apiUrl}/api/patient/id/${id}`);
   }
 
-  // Donors
-  getDonors(): Observable<any> {
-    return this._http.get(`${environment.apiUrl}/api/donor`);
+  getPatientsBy(key, value): Observable<IPatient> {
+    return this._http.get(`${environment.apiUrl}/api/patient/${key}/${value}`) as Observable<IPatient>;
   }
 
 }

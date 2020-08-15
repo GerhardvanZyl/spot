@@ -3,10 +3,11 @@ import { IPractice } from 'src/app/model/Ipractice';
 import { NgForm } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
-import { IPracticeViewModel } from 'src/app/view-model/Ipractice-viewmodel';
-import { PracticeViewModel } from 'src/app/view-model/practice-viewmodel';
+import { IPracticeViewModel } from 'src/app/view-model/ipractice.viewmodel';
+import { PracticeViewModel } from 'src/app/view-model/practice.viewmodel';
 import { IAddress } from 'src/app/model/iaddress';
-import { IContactInfo } from 'src/app/model/icontact-info';
+import { Practice } from 'src/app/model/practice';
+import { PracticeService } from 'src/app/services/practice.service';
 
 @Component({
   selector: 'app-practice',
@@ -15,37 +16,31 @@ import { IContactInfo } from 'src/app/model/icontact-info';
 })
 export class PracticeComponent implements OnInit {
 
-  practice: IPracticeViewModel = new PracticeViewModel();
+  practice: IPracticeViewModel = <IPracticeViewModel>{};
 
-  constructor(private _dataService: DataService, private _route: ActivatedRoute, private _router: Router) { }
+  constructor(private _practiceService: PracticeService, private _route: ActivatedRoute, private _router: Router) { }
 
   ngOnInit(): void {
     let practiceId = this._route?.snapshot?.params?.id;
 
     if (practiceId) {
-      this._dataService.getPracticeById(practiceId).subscribe(
-        (data: IPractice) => {
-          this.practice = new PracticeViewModel(data);
-        }
-      );
+      this._practiceService.getPractice(practiceId)
+        .subscribe( practice => this.practice = practice);
     }
   }
 
   onSubmit(form: NgForm) {
-    console.log('submitting');
-    console.log(form);
-    this._dataService.postPractice(this.practice).subscribe(
-      () => console.log("success"),
-      () => console.log("err")
-    );
+
+    this._practiceService.savePractice().subscribe();
+
+
   }
 
   delete(id: string){
     console.log('delete fired');
-    this._dataService.deletePractice(id).subscribe(
-      () => this._router.navigate(['/practices']),
-      (err) => console.error("err: ", err)
-    )
+    this._practiceService.deletePractice(id).subscribe();
+    
+    console.log("delete compelte");
   }
 
 }

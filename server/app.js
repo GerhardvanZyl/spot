@@ -32,6 +32,7 @@ function startServer(app) {
 
 console.log('start');
 
+// TODO get from config
     app.use(cors({
         origin: [/localhost.+/,/vaaccs.com.+/]
     }));

@@ -2,8 +2,8 @@
     <h2>Practices</h2>
     <div class="row" *ngFor="let practice of practices" [routerLink]="['/practice/', practice.id]" routerLinkActive="active">
         <div class="col-sm">{{practice.name}}</div>
-        <div class="col-sm">{{practice.defaultEmail }}</div>
-        <div class="col-sm">{{practice.defaultPhone}}</div>
-        <div class="col-sm">{{practice.broadLocation}}</div>
+        <div class="col-sm">{{practice.email }}</div>
+        <div class="col-sm">{{practice.phone}}</div>
+        <div class="col-sm">{{practice.displayAddress}}</div>
     </div>
 </div>

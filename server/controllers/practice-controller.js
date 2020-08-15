@@ -33,6 +33,21 @@ router.get('/id/:id', authProvivder.authenticationCheck, async (req, res, next) 
     }
 });
 
+router.get('/:key/:value', authProvivder.authenticationCheck, async (req, res, next) => {
+   
+    const practiceProvider = new PracticeProvider();
+    try {
+        console.log(req.params['key'], ' ', req.params['value']);
+        let practices = await practiceProvider.findByProperty(req.params['key'], req.params['value']);
+
+        if(!practices) res.status(404).json({});
+        else res.status(200).json(practices);
+    } catch (err) {
+        console.error(err);
+        return res.status(400).json(err);
+    }
+});
+
 router.post('/', authProvivder.authenticationCheck, async (req, res) => {
 
     const practiceProvider = new PracticeProvider();

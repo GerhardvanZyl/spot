@@ -10,6 +10,7 @@ class PracticeProvider {
 
             query.exec((err, result) => {
                 if (err) {
+                    console.error(err);
                     reject(err);
                 } else {
                     const returnValue = [];
@@ -66,6 +67,44 @@ class PracticeProvider {
                         };
                     
                         resolve(returnObj);
+                    }
+                }
+            });
+        });
+    }
+
+    findByProperty(key, value){
+        return new Promise((resolve, reject) => {
+            let query = PracticeModel.findByProperty(key, value);
+
+            query.exec((err, res) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    if (!res) {
+                        resolve(null);
+                    } else {
+                        const returnValue = [];
+
+                        for (let res of result) {
+                            returnValue.push({
+                                id: res._id.toString(),
+                                name: res.name,
+                                emailAddresses: res.emailAddresses,
+                                phoneNumbers: res.phoneNumbers,
+                                address: {
+                                    line1: res.address?.line1,
+                                    line2: res.address?.line2,
+                                    suburb: res.address?.suburb,
+                                    city: res.address?.city,
+                                    province: res.address?.province,
+                                    postalCode: res.address?.postalCode
+                                },
+                                patients: res.patients
+                            })
+                        }
+
+                        resolve(returnValue);
                     }
                 }
             });

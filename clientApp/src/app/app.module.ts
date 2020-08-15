@@ -11,8 +11,8 @@ import { DonorsComponent } from './ui-components/donors/donors.component';
 import { DonorComponent } from './ui-components/donor/donor.component';
 import { LoginComponent } from './ui-components/login/login.component';
 import { RootComponent } from './ui-components/root/root.component';
-import { PatientsComponent } from './ui-components/patients/patients.component';
-import { PatientComponent } from './ui-components/patient/patient.component';
+import { AddressComponent } from './ui-components/address/address.component';
+import { ContactInfoComponent } from './ui-components/contact-info/contact-info.component';
 
 @NgModule({
   declarations: [
@@ -23,8 +23,8 @@ import { PatientComponent } from './ui-components/patient/patient.component';
     DonorComponent,
     LoginComponent,
     RootComponent,
-    PatientsComponent,
-    PatientComponent
+    AddressComponent,
+    ContactInfoComponent
   ],
   imports: [
     BrowserModule,

@@ -10,59 +10,19 @@
             <div [hidden]="nameField.valid || nameField.untouched" class="alert alert-danger">Enter a practice name
             </div>
         </div>
-
+        
         <div class="form-group">
-            <label for="addressLine1">Address Line 1</label>
-            <textarea id="address" name="addressLine1" class="form-control" placeholder="Address Line 1" rows="1"
-                [(ngModel)]="practice.address.line1" required #addressLine1="ngModel"></textarea>
+            <label for="email">Email Address</label>
+            <input class="form-control" name="email" placeholder="Email Address"
+                [(ngModel)]="practice.email" required />
         </div>
-
+        
         <div class="form-group">
-            <label for="addressLine2">Address Line 2</label>
-            <textarea id="address" name="addressLine2" class="form-control" placeholder="Address Line 2" rows="1"
-                [(ngModel)]="practice.address.line2" required #addressLine2="ngModel"></textarea>
+            <label for="phone">Phone Number</label>
+            <input class="form-control" name="phone" placeholder="Phone Number"
+                [(ngModel)]="practice.phone" required />
         </div>
-
-        <div class="form-group">
-            <label for="addressLine1">Suburb</label>
-            <textarea id="address" name="suburb" class="form-control" placeholder="Suburb" rows="1"
-                [(ngModel)]="practice.address.suburb" required #suburb="ngModel"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="city">City</label>
-            <textarea id="city" name="city" class="form-control" placeholder="City" rows="1"
-                [(ngModel)]="practice.address.city" required #city="ngModel"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="province">Province</label>
-            <textarea id="province" name="province" class="form-control" placeholder="Province" rows="1"
-                [(ngModel)]="practice.address.province" required #province="ngModel"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="postalCode">Postal Code</label>
-            <textarea id="postalCode" name="postalCode" class="form-control" placeholder="Postal Code" rows="1"
-                [(ngModel)]="practice.address.postalCode" required #postalCode="ngModel"></textarea>
-        </div>
-
-        <div *ngFor="let emailAddr of practice.emailAddresses; let i=index">
-            <div class="form-group">
-                <label [for]="'email'+i">Email Address {{i + 1}}</label>
-                <input class="form-control" [name]="'email'+i" placeholder="Email Address"
-                    [(ngModel)]="practice.emailAddresses[i].value" required />
-            </div>
-        </div>
-
-        <div *ngFor="let phone of practice.phoneNumbers; let i=index">
-            <div class="form-group">
-                <label [for]="'phone'+i">Phone Number {{i + 1}}</label>
-                <input class="form-control" [name]="'phone'+i" placeholder="Phone Number"
-                    [(ngModel)]="practice.phoneNumbers[i].value" required />
-            </div>
-        </div>
-
+    
         <div class="row">
             <div class="col-sm">
                 <button class="btn btn-primary">Save</button>
