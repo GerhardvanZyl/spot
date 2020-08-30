@@ -40,11 +40,13 @@ export class PracticeService {
           let practices = [];
 
           data.forEach(practice => {
+            console.log("practice returned: ", practice);
             practices.push(new PracticeViewModel(practice));
           });
 
           subscriber.next(practices);
-        }
+        },
+        err => console.log(err)
       )
     });
   }
@@ -55,7 +57,8 @@ export class PracticeService {
         (result) => {
           console.log(result);
           subscriber.next(result);
-        }
+        },
+        err => console.log(err)
       );
     });
   }

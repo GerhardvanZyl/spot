@@ -8,7 +8,7 @@ const patientSchema = new mongoose.Schema({
     isBloodDonor: {type: Boolean},
     bloodType: {type: String},
     practiceId: {type: String},
-    lastBloodDonation: {type: Date}
+    lastBloodDonationDate: {type: Date}
 });
 
 module.exports = PatientModel = mongoose.model('Patient', patientSchema);

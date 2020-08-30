@@ -1,10 +1,30 @@
 <div class="container">
-    <h2>Donors</h2>
+    <div class="row">
+        <div class="col-sm-10">
+            <h2>Donors</h2>
+        </div>
+        <div class="col-sm-2 float-right">
+            <button class="btn btn-primary" type="button" routerLink="/practices" routerLinkActive="active">Go to
+                Practices</button>
+        </div>
+    </div>
+    <div class="row font-weight-bold">
+        <div class="col-sm">Name</div>
+        <div class="col-sm">Surname</div>
+        <div class="col-sm">Owner Name</div>
+        <div class="col-sm">Email</div>
+        <div class="col-sm">Phone</div>
+    </div>
     <div class="row" *ngFor="let donor of donors" [routerLink]="['/donor/', donor.id]" routerLinkActive="active">
         <div class="col-sm">{{donor.name}}</div>
         <div class="col-sm">{{donor.surname}}</div>
         <div class="col-sm">{{donor.ownerName}}</div>
-        <div class="col-sm">{{donor.emailAddress}}</div>
-        <div class="col-sm">{{donor.phoneNumber}}</div>
+        <div class="col-sm">{{donor.email}}</div>
+        <div class="col-sm">{{donor.phone}}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <button class="btn btn-primary" type="button" routerLink="/donor" routerLinkActive="active">Add new</button>
+        </div>
     </div>
 </div>

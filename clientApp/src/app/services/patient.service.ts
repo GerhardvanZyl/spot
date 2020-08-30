@@ -24,9 +24,15 @@ export class PatientService {
         this.patient = new PatientViewModel(data) as IPatientViewModel;
 
         this._dataService.getPracticeById(this.patient.practiceId).subscribe((data: any) => {
-          this.patient.practiceName = data.name;
+          if(data) {
+            this.patient.practiceName = data.name;
+          }
           subscriber.next(this.patient);
-        });
+        },
+        err => {
+          console.log(err);
+          subscriber.next(this.patient);
+        })
       });
     });
   }
@@ -44,7 +50,8 @@ export class PatientService {
           });
 
           subscriber.next(patients);
-        }
+        },
+        err => console.log(err)
       )
     });
   }
@@ -56,7 +63,8 @@ export class PatientService {
       this._dataService.postPatient(new Patient(this.patient)).subscribe(
         (data: any) => {
           subscriber.next(data);
-        }
+        },
+        err => console.log(err)
       )
     });
   }

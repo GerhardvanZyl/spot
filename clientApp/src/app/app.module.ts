@@ -13,6 +13,8 @@ import { LoginComponent } from './ui-components/login/login.component';
 import { RootComponent } from './ui-components/root/root.component';
 import { AddressComponent } from './ui-components/address/address.component';
 import { ContactInfoComponent } from './ui-components/contact-info/contact-info.component';
+import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,10 @@ import { ContactInfoComponent } from './ui-components/contact-info/contact-info.
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DlDateTimeDateModule,
+    DlDateTimePickerModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

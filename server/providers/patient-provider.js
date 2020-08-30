@@ -143,7 +143,7 @@ class PatientProvider {
 
             const patientModel = new PatientModel({
                 // TODO; clone owners as well
-                id: patient.id.toString(),
+                id: patient?.id?.toString(),
                 name: patient.name,
                 surname: patient.surname,
                 owners: patient.owners,

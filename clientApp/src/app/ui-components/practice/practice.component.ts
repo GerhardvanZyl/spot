@@ -26,14 +26,14 @@ export class PracticeComponent implements OnInit {
     if (practiceId) {
       this._practiceService.getPractice(practiceId)
         .subscribe( practice => this.practice = practice);
+    } else {
+      this.practice = this._practiceService.practice = new PracticeViewModel();
     }
   }
 
   onSubmit(form: NgForm) {
 
     this._practiceService.savePractice().subscribe();
-
-
   }
 
   delete(id: string){

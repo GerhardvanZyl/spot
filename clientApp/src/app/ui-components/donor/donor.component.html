@@ -5,8 +5,8 @@
     <form #form="ngForm" (ngSubmit)="onSubmit(form)">
         <div class="form-group">
             <label for="name">Name</label>
-            <input id="name" name="name" class="form-control" placeholder="Donor Name" [(ngModel)]="donor.name"
-                required #nameField="ngModel" />
+            <input id="name" name="name" class="form-control" placeholder="Donor Name" [(ngModel)]="donor.name" required
+                #nameField="ngModel" />
             <div [hidden]="nameField.valid || nameField.untouched" class="alert alert-danger">Enter a Donor name
             </div>
         </div>
@@ -29,31 +29,51 @@
 
         <div class="form-group">
             <label for="email">Email Address</label>
-            <input class="form-control" name="email" placeholder="Email Address"
-                [(ngModel)]="donor.email" required />
+            <input class="form-control" name="email" placeholder="Email Address" [(ngModel)]="donor.email" required />
         </div>
 
         <div class="form-group">
             <label for="phone">Phone Number</label>
-            <input class="form-control" name="phone" placeholder="Phone Number"
-                [(ngModel)]="donor.phone" required />
+            <input class="form-control" name="phone" placeholder="Phone Number" [(ngModel)]="donor.phone" required />
         </div>
 
         <div class="form-group">
             <label for="practice">Practice</label>
-            <input type="text" class="form-control" name="practice" [(ngModel)]="donor.practiceName">
+
+            <div ngbDropdown>
+                <button class="btn btn-secondary" ngbDropdownToggle id="dropdown-menu-button" type="button">
+                    {{donor.practiceName || "Select a preferred practice" }}
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdown-menu-button">
+                    <a class="dropdown-item" *ngIf="!donor.practiceId">Select a preferred practice</a>
+                    <a class="dropdown-item" *ngFor="let practice of practices"  (click)="selectPractice(practice)" >{{practice.name}}</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="practice">Last Donation Date</label>
+            <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="donor.lastBloodDonationDate"
+                    ngbDatepicker #d="ngbDatepicker">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                </div>
+            </div>
         </div>
 
         <div class="row">
-            <div class="col-sm">
+            <div class="col-sm-1">
+                <button class="btn btn-primary" type="button" [routerLink]="['/donors/']" routerLinkActive="active">Back</button>
+            </div>
+            <div class="col-sm-1 float-right">
                 <button class="btn btn-primary">Save</button>
             </div>
-            <div class="col-sm">
-                <button class="btn btn-primary">Edit</button>
-            </div>
-            <div class="col-sm">
+            
+            <div class="col-sm-1 float-right">
                 <button class="btn btn-primary" type="button" (click)="delete(donor.id)">Delete</button>
             </div>
+            
         </div>
     </form>
 </div>

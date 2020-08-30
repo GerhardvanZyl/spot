@@ -4,6 +4,7 @@ import { IPracticeViewModel } from './ipractice.viewmodel';
 import { IOwner } from '../model/iowner';
 import { IOwnerViewModel } from './iowner.viewmodel';
 import { IAddressViewModel } from './iaddress.viewmodel';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 export class PatientViewModel implements IPatientViewModel {
     id: string;
@@ -16,11 +17,14 @@ export class PatientViewModel implements IPatientViewModel {
     practiceName: string;
     email: string;
     phone: string;
-    lastBloodDonationDate: string;
+    lastBloodDonationDate: NgbDateStruct;
 
-    constructor(data: any){
-        this.id = data.id;
-        this.name = data.name;
+    constructor(data?: any){
+        
+        if(!data) return;
+
+        this.id = data.id ? data.id : '';
+        this.name = data.name ? data.name : '';
         this.surname = data.owners?.length > 0 ? data.owners[0].surname : '';
         this.ownerName = data.owners?.length > 0 ? data.owners[0].firstName : '';
         this.isBloodDonor = data.isBloodDonor;
@@ -29,7 +33,18 @@ export class PatientViewModel implements IPatientViewModel {
         this.practiceName = data.practiceName;
         this.email = data.owners?.length > 0 ? data.owners[0].emailAddresses[0] : '';
         this.phone = data.owners?.length > 0 ? data.owners[0].phoneNumbers[0] : '';
-        this.lastBloodDonationDate = this.lastBloodDonationDate ? this.lastBloodDonationDate : '';
+        this.lastBloodDonationDate = data.lastBloodDonationDate ? (() => {
+            let date = new Date(data.lastBloodDonationDate);
+            console.log("Date on load: ", date);
+
+            console.log(`Getting values: ${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`)
+
+            return <NgbDateStruct>{
+                year: date.getFullYear(),
+                month: date.getMonth() + 1,
+                day: date.getDate()
+            }
+        })() : null;
     }
 
 }

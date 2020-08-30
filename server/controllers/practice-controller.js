@@ -53,6 +53,7 @@ router.post('/', authProvivder.authenticationCheck, async (req, res) => {
     const practiceProvider = new PracticeProvider();
     try {
         let result = await practiceProvider.save({
+            id: req.body.id,
             name: req.body.name,
             emailAddresses: req.body.emailAddresses,
             phoneNumbers: req.body.phoneNumbers,

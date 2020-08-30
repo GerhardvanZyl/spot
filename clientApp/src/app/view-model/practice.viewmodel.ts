@@ -13,7 +13,7 @@ export class PracticeViewModel implements IPracticeViewModel {
     phone: string;
     
     constructor(data?: any){
-        if(data){
+        if(!data) return;
             this.id = data.id;
             this.name = data.name;
             
@@ -48,6 +48,5 @@ export class PracticeViewModel implements IPracticeViewModel {
             } else {
                 this.phone = '';
             }
-        }
     }
 }
