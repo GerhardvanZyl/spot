@@ -34,8 +34,8 @@ describe('PracticeController', () => {
 
     const sourcePractice1 = {
         name: 'oli',
-        emailAddresses: [{ value: 'a@b.com' }],
-        phoneNumbers: [{ value: '011565854' }],
+        emailAddresses: ['a@b.com'],
+        phoneNumbers: ['011565854'],
         address: {
             line1: 'unit 1',
             line2: '1 second street',
@@ -48,8 +48,8 @@ describe('PracticeController', () => {
 
     const sourcePractice2 = {
         name: 'oli2',
-        emailAddresses: [{ value: 'a2@b.com' }],
-        phoneNumbers: [{ value: '0115265854' }],
+        emailAddresses: ['a2@b.com'],
+        phoneNumbers: ['0115265854'],
         address: {
             line1: 'unit 2',
             line2: '2 second street',
@@ -62,8 +62,8 @@ describe('PracticeController', () => {
 
     const sourcePractice3 = {
         name: 'oli3',
-        emailAddresses: [{ value: 'a@b.com' }, { value: 'ac@b.com' }],
-        phoneNumbers: [{ value: '011565854' }, { value: '011565856' }],
+        emailAddresses: ['a@b.com', 'ac@b.com'],
+        phoneNumbers: ['011565854', '011565856'],
         address: {
             line1: 'unit 3',
             line2: '3 second street',
@@ -100,8 +100,8 @@ describe('PracticeController', () => {
 
             expect(response.length).toEqual(2);
             expect(response[0].name).toEqual(sourcePractice1.name);
-            expect(response[0].emailAddresses[0].value).toEqual(sourcePractice1.emailAddresses[0].value);
-            expect(response[0].phoneNumbers[0].value).toEqual(sourcePractice1.phoneNumbers[0].value);
+            expect(response[0].emailAddresses[0]).toEqual(sourcePractice1.emailAddresses[0]);
+            expect(response[0].phoneNumbers[0]).toEqual(sourcePractice1.phoneNumbers[0]);
             expect(response[0].address.line1).toEqual(sourcePractice1.address.line1);
             expect(response[0].address.line2).toEqual(sourcePractice1.address.line2);
             expect(response[0].address.suburb).toEqual(sourcePractice1.address.suburb);
@@ -110,8 +110,8 @@ describe('PracticeController', () => {
             expect(response[0].address.postalCode).toEqual(sourcePractice1.address.postalCode);
 
             expect(response[1].name).toEqual(sourcePractice2.name);
-            expect(response[1].emailAddresses[0].value).toEqual(sourcePractice2.emailAddresses[0].value);
-            expect(response[1].phoneNumbers[0].value).toEqual(sourcePractice2.phoneNumbers[0].value);
+            expect(response[1].emailAddresses[0]).toEqual(sourcePractice2.emailAddresses[0]);
+            expect(response[1].phoneNumbers[0]).toEqual(sourcePractice2.phoneNumbers[0]);
             expect(response[1].address.line1).toEqual(sourcePractice2.address.line1);
             expect(response[1].address.line2).toEqual(sourcePractice2.address.line2);
             expect(response[1].address.suburb).toEqual(sourcePractice2.address.suburb);
@@ -131,8 +131,8 @@ describe('PracticeController', () => {
 
             expect(response.length).toEqual(1);
             expect(response[0].name).toEqual(sourcePractice1.name);
-            expect(response[0].emailAddresses[0].value).toEqual(sourcePractice1.emailAddresses[0].value);
-            expect(response[0].phoneNumbers[0].value).toEqual(sourcePractice1.phoneNumbers[0].value);
+            expect(response[0].emailAddresses[0]).toEqual(sourcePractice1.emailAddresses[0]);
+            expect(response[0].phoneNumbers[0]).toEqual(sourcePractice1.phoneNumbers[0]);
             expect(response[0].address.line1).toEqual(sourcePractice1.address.line1);
             expect(response[0].address.line2).toEqual(sourcePractice1.address.line2);
             expect(response[0].address.suburb).toEqual(sourcePractice1.address.suburb);
@@ -150,10 +150,10 @@ describe('PracticeController', () => {
             const responseObj = await request(server.app).get('/api/practice');
             const response = responseObj.body;
             
-            expect(response[0].emailAddresses[0].value).toEqual(sourcePractice3.emailAddresses[0].value);
-            expect(response[0].phoneNumbers[0].value).toEqual(sourcePractice3.phoneNumbers[0].value);
-            expect(response[0].emailAddresses[1].value).toEqual(sourcePractice3.emailAddresses[1].value);
-            expect(response[0].phoneNumbers[1].value).toEqual(sourcePractice3.phoneNumbers[1].value);
+            expect(response[0].emailAddresses[0]).toEqual(sourcePractice3.emailAddresses[0]);
+            expect(response[0].phoneNumbers[0]).toEqual(sourcePractice3.phoneNumbers[0]);
+            expect(response[0].emailAddresses[1]).toEqual(sourcePractice3.emailAddresses[1]);
+            expect(response[0].phoneNumbers[1]).toEqual(sourcePractice3.phoneNumbers[1]);
         });
 
         it('should return an empty array if there are none', async () => {
@@ -176,8 +176,8 @@ describe('PracticeController', () => {
             const response = responseObj.body;
 
             expect(response.name).toEqual(sourcePractice2.name);
-            expect(response.emailAddresses[0].value).toEqual(sourcePractice2.emailAddresses[0].value);
-            expect(response.phoneNumbers[0].value).toEqual(sourcePractice2.phoneNumbers[0].value);
+            expect(response.emailAddresses[0]).toEqual(sourcePractice2.emailAddresses[0]);
+            expect(response.phoneNumbers[0]).toEqual(sourcePractice2.phoneNumbers[0]);
             expect(response.address.line1).toEqual(sourcePractice2.address.line1);
             expect(response.address.line2).toEqual(sourcePractice2.address.line2);
             expect(response.address.suburb).toEqual(sourcePractice2.address.suburb);
@@ -207,8 +207,8 @@ describe('PracticeController', () => {
 
             expect(response.length).toEqual(1);
             expect(response[0].name).toEqual(sourcePractice1.name);
-            expect(response[0].emailAddresses[0].value).toEqual(sourcePractice1.emailAddresses[0].value);
-            expect(response[0].phoneNumbers[0].value).toEqual(sourcePractice1.phoneNumbers[0].value);
+            expect(response[0].emailAddresses[0]).toEqual(sourcePractice1.emailAddresses[0]);
+            expect(response[0].phoneNumbers[0]).toEqual(sourcePractice1.phoneNumbers[0]);
             expect(response[0].address.line1).toEqual(sourcePractice1.address.line1);
             expect(response[0].address.line2).toEqual(sourcePractice1.address.line2);
             expect(response[0].address.suburb).toEqual(sourcePractice1.address.suburb);
@@ -225,10 +225,10 @@ describe('PracticeController', () => {
 
             const response = await practiceProvider.retrieveAll();
 
-            expect(response[0].emailAddresses[0].value).toEqual(sourcePractice3.emailAddresses[0].value);
-            expect(response[0].phoneNumbers[0].value).toEqual(sourcePractice3.phoneNumbers[0].value);
-            expect(response[0].emailAddresses[1].value).toEqual(sourcePractice3.emailAddresses[1].value);
-            expect(response[0].phoneNumbers[1].value).toEqual(sourcePractice3.phoneNumbers[1].value);
+            expect(response[0].emailAddresses[0]).toEqual(sourcePractice3.emailAddresses[0]);
+            expect(response[0].phoneNumbers[0]).toEqual(sourcePractice3.phoneNumbers[0]);
+            expect(response[0].emailAddresses[1]).toEqual(sourcePractice3.emailAddresses[1]);
+            expect(response[0].phoneNumbers[1]).toEqual(sourcePractice3.phoneNumbers[1]);
         });
     });
 });
