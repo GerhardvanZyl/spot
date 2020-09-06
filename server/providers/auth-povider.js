@@ -44,7 +44,7 @@ module.exports = authProvider = {
         
         // For now only dev test account
         // TODO: move to env var
-        if(req?.user?.id === "106479279514574710141"){
+        if(config.users.indexOf(req?.user?.email) > -1){
             return next();
         }
         res.status(401).json({message: "Unauthorized"});

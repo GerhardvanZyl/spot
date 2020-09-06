@@ -12,7 +12,8 @@ function extractProfile(profile){
     return {
         id: profile.id,
         displayName: profile.displayName,
-        image: imageUrl
+        image: imageUrl,
+        email: profile.emails[0].value
     };
 }
 
