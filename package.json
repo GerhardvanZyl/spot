@@ -1,13 +1,17 @@
 {
-  "name": "fido",
+  "name": "spot",
   "version": "1.0.0",
+  "engines": {
+  	"node": "14.x"
+  },
   "description": "Vetinary blood donation admin",
   "main": "app",
   "scripts": {
     "test": "jest server --runInBand",
     "test:debug-server": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand",
     "start:debug": "node --inspect-brk ./server/app.js --runInBand",
-    "start": "nodemon server/app.js",
+    "start": "node server/app.js",
+    "start:dev": "nodemon server/app.js",
     "start:validate": "npm run lint & nodemon server/app.js",
     "lint": "eslint ."
   },
