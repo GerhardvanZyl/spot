@@ -12,8 +12,11 @@ const path = require('path');
 const passport = require('passport');
 const authProvider = require('./providers/auth-povider.js');
 const cookieSession = require('cookie-session');
+const timeout = require('connect-timeout');
 
-//const LocalStrategy = require('passport-local');
+function haltOnTimedout(req, res, next){
+  if (!req.timedout) next();
+}
 
 const isUnitTesting = process.argv[1].indexOf('node_modules\\jest\\bin\\jest.js') > -1;
 const port = config.port || 3000;
@@ -30,11 +33,11 @@ module.exports = {
 
 function startServer(app) {
 
-console.log('start');
-
 // TODO get from config
+    app.use(timeout(config.timeout * 1000));
+    
     app.use(cors({
-        origin: [/localhost.+/,/vaaccs.com.+/]
+        origin: config.cors
     }));
 
     app.use(express.static(path.join(__dirname, 'wwwroot')));
@@ -44,7 +47,7 @@ console.log('start');
     app.use(bodyParser.urlencoded({ extended: false }));
 
     app.use(cookieSession({
-        maxAge: 24*60*60*100,
+        maxAge: config.cookieTimeout*60*60*1000,
         keys: [config.cookieKey]
     }));
 
@@ -54,6 +57,8 @@ console.log('start');
     app.use('/api/practice', practiceController);
     app.use('/api/patient', patientController);
     app.use('/authentication', authenticationController);
+
+    app.use(haltOnTimedout);
 
     app.get('/*', (req, res )=>{
         res.sendFile(__dirname + '/wwwroot/index.html');
