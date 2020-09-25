@@ -46,10 +46,25 @@ export class PatientService {
           let patients = [];
 
           data.forEach(patient => {
-            patients.push(new PatientViewModel(patient));
-          });
 
-          subscriber.next(patients);
+            // TODO: Caching dataservice
+            if(patient.practiceId){
+              this._dataService.getPracticeById(patient.practiceId).subscribe((practiceData: any) => {
+
+                if(practiceData) {
+                  patient.practiceName = practiceData.name;
+                }
+  
+                patients.push(new PatientViewModel(patient));
+                subscriber.next(patients);
+
+              });
+            } else {
+              patients.push(new PatientViewModel(patient));
+              subscriber.next(patients);
+            }
+            
+          });
         },
         err => console.log(err)
       )

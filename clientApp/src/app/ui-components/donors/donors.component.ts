@@ -26,4 +26,31 @@ export class DonorsComponent implements OnInit {
 
       });
   }
+
+  sortBy(property): void {
+
+    if (property === 'lastBDDisplayDate') {
+      this.donors.sort((a, b): number => {
+        if (!a[property]) return -1;
+        if (!b[property]) return 1;
+
+        return a[property] - b[property];
+      });
+    } else {
+      this.donors.sort((a, b): number => {
+
+        if (!a[property]) return -1;
+        if (!b[property]) return 1;
+
+        if(typeof a[property] === 'string' && typeof b[property] === 'string' ) {
+          if (a[property].toLocaleLowerCase() < b[property].toLocaleLowerCase()) return -1;
+          if (a[property].toLocaleLowerCase() > b[property.toLocaleLowerCase()]) return 1;  
+        }
+
+        if (a[property] < b[property]) return -1;
+        if (a[property] > b[property]) return 1;
+        return 0
+      });
+    }
+  }
 }

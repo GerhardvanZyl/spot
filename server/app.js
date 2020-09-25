@@ -37,7 +37,7 @@ function startServer(app) {
     app.use(timeout(config.timeout * 1000));
     
     app.use(cors({
-        origin: config.cors
+        origin: [/localhost.+/,/vaaccs.com.+/]
     }));
 
     app.use(express.static(path.join(__dirname, 'wwwroot')));

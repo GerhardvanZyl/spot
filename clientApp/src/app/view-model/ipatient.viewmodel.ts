@@ -14,5 +14,6 @@ export interface IPatientViewModel {
     practiceName: string,
     email: string,
     phone: string,
-    lastBloodDonationDate: NgbDateStruct
+    lastBloodDonationDate: NgbDateStruct,
+    lastBDDisplayDate: Date
 }

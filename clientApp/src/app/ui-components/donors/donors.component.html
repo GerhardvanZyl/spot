@@ -8,16 +8,20 @@
                 Practices</button>
         </div>
     </div>
-    <div class="row font-weight-bold">
-        <div class="col-sm">Name</div>
-        <div class="col-sm">Surname</div>
-        <div class="col-sm">Owner Name</div>
-        <div class="col-sm">Email</div>
-        <div class="col-sm">Phone</div>
+    <div class="row font-weight-bold clickable">
+        <div class="col-sm" (click)="sortBy('name')">Name</div>
+        <div class="col-sm" (click)="sortBy('surname')">Surname</div>
+        <div class="col-sm" (click)="sortBy('lastBDDisplayDate')">Last Donation</div>
+        <div class="col-sm" (click)="sortBy('practiceName')">Practice</div>
+        <div class="col-sm" (click)="sortBy('ownerName')">Owner Name</div>
+        <div class="col-sm" (click)="sortBy('email')">Email</div>
+        <div class="col-sm" (click)="sortBy('phone')">Phone</div>
     </div>
-    <div class="row" *ngFor="let donor of donors" [routerLink]="['/donor/', donor.id]" routerLinkActive="active">
+    <div class="row clickable" *ngFor="let donor of donors" [routerLink]="['/donor/', donor.id]" routerLinkActive="active">
         <div class="col-sm">{{donor.name}}</div>
         <div class="col-sm">{{donor.surname}}</div>
+        <div class="col-sm">{{donor.lastBDDisplayDate | date}}</div>
+        <div class="col-sm">{{donor.practiceName}}</div>
         <div class="col-sm">{{donor.ownerName}}</div>
         <div class="col-sm">{{donor.email}}</div>
         <div class="col-sm">{{donor.phone}}</div>
