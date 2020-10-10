@@ -42,11 +42,11 @@ module.exports = authProvider = {
             return next();
         }
         
-        // For now only dev test account
-        // TODO: move to env var
         if(config.users.indexOf(req?.user?.email) > -1){
             return next();
         }
+
+        // TODO: Providers should not return res
         res.status(401).json({message: "Unauthorized"});
     },
     getSessionInfo: (req, res) => {

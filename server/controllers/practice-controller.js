@@ -22,7 +22,6 @@ router.get('/id/:id', authProvivder.authenticationCheck, async (req, res, next) 
    
     const practiceProvider = new PracticeProvider();
     try {
-        console.log(req.params['id']);
         let practices = await practiceProvider.findById(req.params['id']);
 
         if(!practices) res.status(404).json({});
@@ -37,7 +36,6 @@ router.get('/:key/:value', authProvivder.authenticationCheck, async (req, res, n
    
     const practiceProvider = new PracticeProvider();
     try {
-        console.log(req.params['key'], ' ', req.params['value']);
         let practices = await practiceProvider.findByProperty(req.params['key'], req.params['value']);
 
         if(!practices) res.status(404).json({});
@@ -74,10 +72,6 @@ router.delete('/id/:id', authProvivder.authenticationCheck, async (req, res, nex
 
     try{
         let result = await practiceProvider.delete(req.params['id']);
-
-        console.log('result in controller: ');
-        console.log(result);
-
         res.status(200).json(result);
     } catch (err) {
         console.error(err);

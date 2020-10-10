@@ -30,8 +30,6 @@ export class AuthService {
   }
 
   public setUserInfo(user) {
-    console.log("userinfo:");
-    console.log(user);
     localStorage.setItem('userInfo', JSON.stringify(user));
   }
 

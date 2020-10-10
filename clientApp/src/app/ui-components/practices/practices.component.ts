@@ -13,13 +13,11 @@ import { PracticeService } from 'src/app/services/practice.service';
 })
 export class PracticesComponent implements OnInit {
 
-  //practices: Observable<Practice[]>;
   practices: IPracticeViewModel[] = [];
 
   constructor(private _practiceService: PracticeService) { }
 
   ngOnInit(): void {
-    //this.practices = this._dataService.getPractices();
     this._practiceService.getPractices().subscribe(
       practices => this.practices = practices,
       error => console.error(error)

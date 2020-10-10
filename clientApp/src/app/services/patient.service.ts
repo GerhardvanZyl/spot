@@ -15,7 +15,6 @@ export class PatientService {
   patient: IPatientViewModel;
 
   constructor(private _dataService: DataService) {
-    console.log('Patient Service constructed');
   }
 
   getPatient(id: string): Observable<IPatientViewModel> {
@@ -30,8 +29,8 @@ export class PatientService {
           subscriber.next(this.patient);
         },
         err => {
-          console.log(err);
-          subscriber.next(this.patient);
+          console.error(err);
+          //subscriber.next(this.patient);
         })
       });
     });
@@ -66,7 +65,7 @@ export class PatientService {
             
           });
         },
-        err => console.log(err)
+        err => console.error(err)
       )
     });
   }
@@ -79,7 +78,7 @@ export class PatientService {
         (data: any) => {
           subscriber.next(data);
         },
-        err => console.log(err)
+        err => console.error(err)
       )
     });
   }

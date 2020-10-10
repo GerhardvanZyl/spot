@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IPatientViewModel } from 'src/app/view-model/ipatient.viewmodel';
 import { PatientViewModel } from 'src/app/view-model/patient.viewmodel';
 import { PatientService } from 'src/app/services/patient.service';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { IPractice } from 'src/app/model/ipractice';
 import { IPracticeViewModel } from 'src/app/view-model/ipractice.viewmodel';
 import { PracticeService } from 'src/app/services/practice.service';
 
@@ -19,7 +16,7 @@ export class DonorComponent implements OnInit {
   donor: IPatientViewModel = <IPatientViewModel>{};
   practices: IPracticeViewModel[] = [];
 
-  constructor(private _patientService: PatientService, private _practiceService: PracticeService, private _route: ActivatedRoute, private _router: Router) { }
+  constructor(private _patientService: PatientService, private _practiceService: PracticeService, private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
     let donorId = this._route?.snapshot?.params?.id;
@@ -34,15 +31,14 @@ export class DonorComponent implements OnInit {
 
     this._practiceService.getPractices().subscribe(data => {
       this.practices = data;
-      console.log(data);
     });
   }
 
-  delete(id): void {
+  delete(): void {
     this._patientService.delete().subscribe(() => { });;
   }
 
-  onSubmit(form): void {
+  onSubmit(): void {
     this._patientService.savePatient().subscribe(() => { });;
   }
 

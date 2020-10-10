@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IPatient } from 'src/app/model/ipatient';
 import { IPatientViewModel } from 'src/app/view-model/ipatient.viewmodel';
-import { DataService } from 'src/app/services/data.service';
-import { PatientViewModel } from 'src/app/view-model/patient.viewmodel';
-import { PracticeService } from 'src/app/services/practice.service';
-import { PracticeViewModel } from 'src/app/view-model/practice.viewmodel';
 import { PatientService } from 'src/app/services/patient.service';
 
 @Component({
@@ -16,7 +11,7 @@ export class DonorsComponent implements OnInit {
 
   donors: IPatientViewModel[] = [];
 
-  constructor(private _patientService: PatientService, private _practiceService: PracticeService) { }
+  constructor(private _patientService: PatientService) { }
 
   ngOnInit(): void {
     this._patientService.getDonors().subscribe(
@@ -49,7 +44,7 @@ export class DonorsComponent implements OnInit {
 
         if (a[property] < b[property]) return -1;
         if (a[property] > b[property]) return 1;
-        return 0
+        return 0;
       });
     }
   }

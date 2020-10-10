@@ -39,17 +39,20 @@ class PatientProvider {
                 if (err) {
                     reject(err);
                 } else {
-
-                    resolve({
-                        id: result._id.toString(),
-                        name: result.name,
-                        surname: result.surname,
-                        owners: result.owners,
-                        isBloodDonor: result.isBloodDonor,
-                        bloodType: result.bloodType,
-                        practiceId: result.practiceId,
-                        lastBloodDonationDate: result.lastBloodDonationDate
-                    });
+                    if (result) {
+                        resolve({
+                            id: result._id.toString(),
+                            name: result.name,
+                            surname: result.surname,
+                            owners: result.owners,
+                            isBloodDonor: result.isBloodDonor,
+                            bloodType: result.bloodType,
+                            practiceId: result.practiceId,
+                            lastBloodDonationDate: result.lastBloodDonationDate
+                        });
+                    } else {
+                        resolve(null);
+                    }
                 }
             });
         });
@@ -120,9 +123,6 @@ class PatientProvider {
                             reject(err);
                         }
     
-                        console.log("patient added: ");
-                        console.log(result);
-    
                         resolve({
                             id: result._id.toString(),
                             name: result.name,
@@ -159,9 +159,6 @@ class PatientProvider {
                         reject(err);
                     }
 
-                    console.log("patient added: ");
-                    console.log(result);
-
                     resolve({
                         id: result._id.toString(),
                         name: result.name,
@@ -183,9 +180,6 @@ class PatientProvider {
                 if (err) {
                     reject(err);
                 }
-
-                console.log('delete patient result in provider: ');
-                console.log(result);
 
                 resolve(result);
             });

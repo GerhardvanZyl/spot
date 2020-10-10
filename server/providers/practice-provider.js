@@ -199,9 +199,6 @@ class PracticeProvider {
                     reject(err);
                 }
 
-                console.log('delete result in provider:');
-                console.log(result);
-
                 resolve(result);
             });
         });

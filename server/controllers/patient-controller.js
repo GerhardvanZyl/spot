@@ -21,8 +21,6 @@ router.get('/', authProvivder.authenticationCheck, async (req, res, next) => {
 router.get('/id/:id', authProvivder.authenticationCheck, async (req, res, next) => {
     const patientProvider = new PatientProvider();
     try {
-        console.log(req.params['id']);
-
         let patients = await patientProvider.findById(req.params['id']);
 
         if(!patients) res.status(404).json({});
@@ -36,8 +34,6 @@ router.get('/id/:id', authProvivder.authenticationCheck, async (req, res, next) 
 router.get('/:key/:value',  authProvivder.authenticationCheck, async (req, res, next) => {
     const patientProvider = new PatientProvider();
     try {
-        console.log(req.params['key'], ' ', req.params['value']);
-
         let patients = await patientProvider.findByProperty(req.params['key'], req.params['value']);
 
         if(!patients) res.status(404).json({});
@@ -75,9 +71,6 @@ router.delete('/id/:id', authProvivder.authenticationCheck, async (req, res, nex
     try {
         let result = await patientProvider.delete(req.params['id']);
 
-        console.log('result in controller: ');
-        console.log(result);
-        
         res.status(200).json(result);
     } catch (err) {
         console.error(err);

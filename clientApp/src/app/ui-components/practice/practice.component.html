@@ -2,7 +2,7 @@
     <h2>Practice</h2>
 
     TODO: Fix up validation
-    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <form #form="ngForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="name">Name</label>
             <input id="name" name="name" class="form-control" placeholder="Practice Name" [(ngModel)]="practice.name"
@@ -31,7 +31,7 @@
                 <button class="btn btn-primary">Save</button>
             </div>
             <div class="col-sm-1">
-                <button class="btn btn-primary" type="button" (click)="delete(practice.id)">Delete</button>
+                <button class="btn btn-primary" type="button" (click)="delete()">Delete</button>
             </div>
         </div>
     </form>

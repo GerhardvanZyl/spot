@@ -2,7 +2,7 @@
     <h2>Donor</h2>
 
     TODO: Fix up validation
-    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <form #form="ngForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="name">Name</label>
             <input id="name" name="name" class="form-control" placeholder="Donor Name" [(ngModel)]="donor.name" required
@@ -71,7 +71,7 @@
             </div>
             
             <div class="col-sm-1 float-right">
-                <button class="btn btn-primary" type="button" (click)="delete(donor.id)">Delete</button>
+                <button class="btn btn-primary" type="button" (click)="delete()">Delete</button>
             </div>
             
         </div>

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
-import { Observable, Subscriber } from 'rxjs';
-import { IPractice } from '../model/ipractice';
+import { Observable } from 'rxjs';
 import { IPracticeViewModel } from '../view-model/ipractice.viewmodel';
 import { PracticeViewModel } from '../view-model/practice.viewmodel';
 import { IAddressViewModel } from '../view-model/iaddress.viewmodel';
@@ -18,7 +17,6 @@ export class PracticeService {
   contactInfo: IContactInfoViewModel;
 
   constructor(private _dataService: DataService) {
-    console.log(' - Practice Service constructed ...');
   }
 
   getPractice(id: string): Observable<IPracticeViewModel> {
@@ -40,13 +38,12 @@ export class PracticeService {
           let practices = [];
 
           data.forEach(practice => {
-            console.log("practice returned: ", practice);
             practices.push(new PracticeViewModel(practice));
           });
 
           subscriber.next(practices);
         },
-        err => console.log(err)
+        err => console.error(err)
       )
     });
   }
@@ -55,15 +52,14 @@ export class PracticeService {
     return new Observable(subscriber => {
       this._dataService.postPractice(new Practice(this.practice)).subscribe(
         (result) => {
-          console.log(result);
           subscriber.next(result);
         },
-        err => console.log(err)
+        err => console.error(err)
       );
     });
   }
 
-  deletePractice(id: string): Observable<void> {
+  deletePractice(): Observable<void> {
     return new Observable(subscriber => {
       this._dataService.deletePractice(this.practice.id).subscribe((data) => {
         // TODO: Error handling

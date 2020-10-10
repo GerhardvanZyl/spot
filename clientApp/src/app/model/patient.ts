@@ -33,15 +33,6 @@ export class Patient implements IPatient {
             ? new Date(`${data.lastBloodDonationDate.year}-${data.lastBloodDonationDate.month}-${data.lastBloodDonationDate.day}`)
                 .toString()
             : null;
-
-            if(data.lastBloodDonationDate){
-                console.log("date start. First text, then todate");
-                console.log(`${data.lastBloodDonationDate.year}-${data.lastBloodDonationDate.month}-${data.lastBloodDonationDate.day}`);
-                console.log(new Date(`${data.lastBloodDonationDate.year}-${data.lastBloodDonationDate.month}-${data.lastBloodDonationDate.day}`)
-                .toString());
-                console.log("--- end -------");
-            }
-
         }
     }
 }

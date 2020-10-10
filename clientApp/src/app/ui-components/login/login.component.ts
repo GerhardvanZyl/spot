@@ -14,9 +14,7 @@ export class LoginComponent implements OnInit {
   userEmail: String;
   userPassword: String;
 
-  constructor(private _authService: AuthService, private router:Router) { 
-    //console.log('constr');
-
+  constructor() { 
     window.location.href = `${environment.apiUrl}/authentication/login`;
   }
 
