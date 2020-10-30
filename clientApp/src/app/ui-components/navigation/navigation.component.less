@@ -1,0 +1,44 @@
+@import "../../../styling/variables.less";
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.navbar-brand {
+    background-image: url('/assets/nav-logo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    width: 7rem;
+    height: 4.5rem;
+}
+
+.navbar {
+    background-color: @primary;
+    padding:0rem;
+
+    >a {
+        padding: 0px;
+    }
+
+    .navbar-nav{
+        
+        .nav-item {
+            height: 4.5rem;
+
+            &:hover {
+                background-color: @primary-highlight;
+            }
+
+            .nav-link{
+                display: flex;
+                height:100%;
+                color: white;
+                width: 7.5rem;
+                justify-content: center;
+                align-items:center;
+            } 
+        }
+    }
+}
+

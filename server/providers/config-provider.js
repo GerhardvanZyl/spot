@@ -15,5 +15,6 @@ module.exports = {
     port: process.env.PORT,
     cookieKey: process.env.COOKIEKEY,
     authMode: process.env.AUTH_MODE ?? "google",
-    users: process.env.USERS ?? []
+    users: process.env.USERS ?? [],
+    apiKey: process.env.APIKEY
 }

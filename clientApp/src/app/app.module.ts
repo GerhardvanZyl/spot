@@ -15,6 +15,7 @@ import { AddressComponent } from './ui-components/address/address.component';
 import { ContactInfoComponent } from './ui-components/contact-info/contact-info.component';
 import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavigationComponent } from './ui-components/navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LoginComponent,
     RootComponent,
     AddressComponent,
-    ContactInfoComponent
+    ContactInfoComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DlDateTimePickerModule,
     NgbModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

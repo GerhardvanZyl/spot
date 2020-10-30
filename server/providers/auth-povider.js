@@ -42,7 +42,7 @@ module.exports = authProvider = {
             return next();
         }
         
-        if(config.users.indexOf(req?.user?.email) > -1){
+        if(config.users.indexOf(req?.user?.email) > -1 || req?.headers?.apikey === config.apiKey){
             return next();
         }
 

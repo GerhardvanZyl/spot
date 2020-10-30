@@ -1,7 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~open-iconic/font/css/open-iconic-bootstrap.css';
+@import 'styling/variables.less';
 
 .clickable {
     cursor: pointer;
+}
+
+.btn.btn-primary {
+    background-color: @primary;
+    border-color: @primary;
+    border-radius: 0px;
 }

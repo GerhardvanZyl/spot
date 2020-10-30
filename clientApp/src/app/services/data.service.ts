@@ -6,11 +6,13 @@ import { environment } from 'src/environments/environment';
 import { IPracticeViewModel } from '../view-model/ipractice.viewmodel';
 import { ThrowStmt } from '@angular/compiler';
 import { IPatient } from '../model/ipatient';
+import { IDataService } from './idata.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
+
+export class DataService implements IDataService {
 
   constructor(private _http: HttpClient) { }
 
@@ -58,7 +60,7 @@ export class DataService {
     return this._http.delete(`${environment.apiUrl}/api/patient/id/${id}`);
   }
 
-  getPatientsBy(key, value): Observable<IPatient> {
+  getPatientsBy(key: string, value:string): Observable<IPatient> {
     return this._http.get(`${environment.apiUrl}/api/patient/${key}/${value}`) as Observable<IPatient>;
   }
 
