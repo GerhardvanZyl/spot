@@ -1,0 +1,9 @@
+<ng-template #savingModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Saving...</h4>
+    </div>
+</ng-template>
+
+<div #statusbar *ngIf="isStatusBarVisible" [class]="statusTypeClass" class="status-bar">
+    <span>{{message}}</span>
+</div>

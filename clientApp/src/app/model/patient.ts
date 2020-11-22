@@ -10,6 +10,7 @@ export class Patient implements IPatient {
     bloodType: string;
     practiceId: string;
     lastBloodDonationDate: string;
+    comments: Comment[];
 
     constructor(data: any){
 
@@ -26,6 +27,7 @@ export class Patient implements IPatient {
             id: data.id,
             surname: data.surname
         }],
+        this.comments = data.comments ?? [],
         this.isBloodDonor = data.isBloodDonor;
         this.bloodType = data.bloodType;
         this.practiceId = data.practiceId;
@@ -35,4 +37,5 @@ export class Patient implements IPatient {
             : null;
         }
     }
+    
 }

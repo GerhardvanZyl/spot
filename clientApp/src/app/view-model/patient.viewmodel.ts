@@ -5,6 +5,7 @@ import { IOwner } from '../model/iowner';
 import { IOwnerViewModel } from './iowner.viewmodel';
 import { IAddressViewModel } from './iaddress.viewmodel';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { CommentViewModel } from './comment.viewmodel';
 
 export class PatientViewModel implements IPatientViewModel {
     id: string;
@@ -19,6 +20,8 @@ export class PatientViewModel implements IPatientViewModel {
     phone: string;
     lastBloodDonationDate: NgbDateStruct;
     lastBDDisplayDate: Date;
+    comments: CommentViewModel[];
+    
 
     constructor(data?: any){
         
@@ -34,6 +37,7 @@ export class PatientViewModel implements IPatientViewModel {
         this.practiceName = data.practiceName;
         this.email = data.owners?.length > 0 ? data.owners[0].emailAddresses[0] : '';
         this.phone = data.owners?.length > 0 ? data.owners[0].phoneNumbers[0] : '';
+        this.comments = data.comments ?? [];
 
         if(data.lastBloodDonationDate) {
 
@@ -53,5 +57,6 @@ export class PatientViewModel implements IPatientViewModel {
         }
 
     }
+    
 
 }

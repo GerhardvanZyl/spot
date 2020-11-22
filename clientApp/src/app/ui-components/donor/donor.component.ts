@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IPatientViewModel } from 'src/app/view-model/ipatient.viewmodel';
 import { PatientViewModel } from 'src/app/view-model/patient.viewmodel';
 import { PatientService } from 'src/app/services/patient.service';
 import { IPracticeViewModel } from 'src/app/view-model/ipractice.viewmodel';
 import { PracticeService } from 'src/app/services/practice.service';
+import { StatusComponent } from '../status/status.component';
 
 @Component({
   selector: 'app-donor',
@@ -15,10 +16,12 @@ export class DonorComponent implements OnInit {
 
   donor: IPatientViewModel = <IPatientViewModel>{};
   practices: IPracticeViewModel[] = [];
+  @ViewChild('status') statusComponent: StatusComponent;
 
   constructor(private _patientService: PatientService, private _practiceService: PracticeService, private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    debugger;
     let donorId = this._route?.snapshot?.params?.id;
 
     if (donorId) {
@@ -39,7 +42,11 @@ export class DonorComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this._patientService.savePatient().subscribe(() => { });;
+    console.log("on submit");
+    this._patientService.savePatient().subscribe(() => {
+      this.statusComponent.hideSaving();
+      this.statusComponent.setSavingSuccess();
+  });
   }
 
   selectPractice(practice): void {

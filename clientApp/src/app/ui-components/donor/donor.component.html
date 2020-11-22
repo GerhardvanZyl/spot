@@ -28,6 +28,14 @@
         </div>
 
         <div class="form-group">
+            <label for="blood-type">Blood Type</label>
+            <input id="blood-type" name="blood-type" class="form-control" placeholder="Blood Type" [(ngModel)]="donor.bloodType"
+                #nameField="ngModel" />
+            <div [hidden]="nameField.valid || nameField.untouched" class="alert alert-danger">Enter a blood Type
+            </div>
+        </div>
+
+        <div class="form-group">
             <label for="email">Email Address</label>
             <input class="form-control" name="email" placeholder="Email Address" [(ngModel)]="donor.email" required />
         </div>
@@ -62,6 +70,8 @@
             </div>
         </div>
 
+        <app-comments [comments]="donor.comments"></app-comments>
+
         <div class="row">
             <div class="col-sm-1">
                 <button class="btn btn-primary" type="button" [routerLink]="['/donors/']" routerLinkActive="active">Back</button>
@@ -76,4 +86,5 @@
             
         </div>
     </form>
+    <app-status #status></app-status>
 </div>

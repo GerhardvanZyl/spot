@@ -1,0 +1,7 @@
+<button (click)="addComment()" type="button">Add Comment</button>
+
+<div *ngIf="comments">
+    <div *ngFor="let comment of comments">
+        <app-comment [comment]="comment"></app-comment>
+    </div>
+</div>

@@ -16,6 +16,9 @@ import { ContactInfoComponent } from './ui-components/contact-info/contact-info.
 import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavigationComponent } from './ui-components/navigation/navigation.component';
+import { StatusComponent } from './ui-components/status/status.component';
+import { CommentComponent } from './ui-components/comment/comment.component';
+import { CommentsComponent } from './ui-components/comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { NavigationComponent } from './ui-components/navigation/navigation.compo
     RootComponent,
     AddressComponent,
     ContactInfoComponent,
-    NavigationComponent
+    NavigationComponent,
+    StatusComponent,
+    CommentComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,

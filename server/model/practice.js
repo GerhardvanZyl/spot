@@ -11,4 +11,4 @@ const practiceSchema = new mongoose.Schema({
     address: { type: addressSchema }
 });
 
-module.exports = PracticeModel = mongoose.model('Practice', practiceSchema);
+module.exports = mongoose.model('Practice', practiceSchema);

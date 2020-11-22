@@ -1,5 +1,4 @@
 const PracticeModel = require('../model/practice');
-const { resolve } = require('path');
 
 class PracticeProvider {
     /**
@@ -20,19 +19,11 @@ class PracticeProvider {
                         returnValue.push({
                             id: res._id.toString(),
                             name: res.name,
-                            emailAddresses: res.emailAddresses,
-                            phoneNumbers: res.phoneNumbers,
-                            address: res.address ? {
-                                line1: res.address?.line1,
-                                line2: res.address?.line2,
-                                suburb: res.address?.suburb,
-                                city: res.address?.city,
-                                province: res.address?.province,
-                                postalCode: res.address?.postalCode
-                            } 
-                            : null,
-                            patients: res.patients
-                        })
+                            emailAddresses: [...res.emailAddresses],
+                            phoneNumbers: [...res.phoneNumbers],
+                            address: {...res.address },
+                            patients: res.patients?.map(patient => {return {...patient};})
+                        });
                     }
 
                     resolve(returnValue);
@@ -55,17 +46,10 @@ class PracticeProvider {
                         const returnObj = {
                             id: res._id.toString(),
                             name: res.name,
-                            emailAddresses: res.emailAddresses,
-                            phoneNumbers: res.phoneNumbers,
-                            address: res.address ? {
-                                line1: res.address?.line1,
-                                line2: res.address?.line2,
-                                suburb: res.address?.suburb,
-                                city: res.address?.city,
-                                province: res.address?.province,
-                                postalCode: res.address?.postalCode
-                            } : null ,
-                            patients: res.patients
+                            emailAddresses: [...res.emailAddresses],
+                            phoneNumbers: [...res.phoneNumbers],
+                            address: {...res.address },
+                            patients: res.patients?.map(patient => {return {...patient};})
                         };
 
                         resolve(returnObj);
@@ -79,11 +63,11 @@ class PracticeProvider {
         return new Promise((resolve, reject) => {
             let query = PracticeModel.findByProperty(key, value);
 
-            query.exec((err, res) => {
+            query.exec((err, result) => {
                 if (err) {
                     reject(err);
                 } else {
-                    if (!res) {
+                    if (!result) {
                         resolve(null);
                     } else {
                         const returnValue = [];
@@ -92,18 +76,11 @@ class PracticeProvider {
                             returnValue.push({
                                 id: res._id.toString(),
                                 name: res.name,
-                                emailAddresses: res.emailAddresses,
-                                phoneNumbers: res.phoneNumbers,
-                                address: res.address ? {
-                                    line1: res.address?.line1,
-                                    line2: res.address?.line2,
-                                    suburb: res.address?.suburb,
-                                    city: res.address?.city,
-                                    province: res.address?.province,
-                                    postalCode: res.address?.postalCode
-                                } : null,
-                                patients: res.patients
-                            })
+                                emailAddresses: [...res.emailAddresses],
+                                phoneNumbers: [...res.phoneNumbers],
+                                address: {...res.address },
+                                patients: res.patients?.map(patient => {return {...patient};})
+                            });
                         }
 
                         resolve(returnValue);
@@ -132,11 +109,10 @@ class PracticeProvider {
                             resolve(null);
                         } else {
 
-                            // TODO: clone email and phone and address
                             existing.name = practice.name;
-                            existing.emailAddresses = practice.emailAddresses;
-                            existing.phoneNumbers = practice.phoneNumbers;
-                            existing.address = practice.address;
+                            existing.emailAddresses = [...practice.emailAddresses];
+                            existing.phoneNumbers = [...practice.phoneNumbers];
+                            existing.address = {...practice.address};
 
                             existing.save((err, result) => {
                                 if (err) {
@@ -150,19 +126,11 @@ class PracticeProvider {
                 });
             } else {
 
-                // TODO: clone emailAddresses and phone numbers as well
                 let practiceModel = PracticeModel({
                     name: practice.name,
-                    emailAddresses: practice.emailAddresses,
-                    phoneNumbers: practice.phoneNumbers,
-                    address: practice.address ? {
-                        line1: practice.address.line1,
-                        line2: practice.address.line2,
-                        suburb: practice.address.suburb,
-                        city: practice.address.city,
-                        province: practice.address.province,
-                        postalCode: practice.address.postalCode
-                    } : null
+                    emailAddresses: [...practice.emailAddresses],
+                    phoneNumbers: [...practice.phoneNumbers],
+                    address: {...practice.address }
                 });
 
                 practiceModel.save((err, result) => {
@@ -170,21 +138,13 @@ class PracticeProvider {
                         reject(err);
                     }
 
-                    // TODO: clone emailAddresses and phone numbers as well
                     resolve({
                         id: result._id,
                         name: result.name,
-                        emailAddresses: result.emailAddresses,
-                        phoneNumbers: result.phoneNumbers,
-                        address: result.address ? {
-                            line1: result.address.line1,
-                            line2: result.address.line2,
-                            suburb: result.address.suburb,
-                            city: result.address.city,
-                            province: result.address.province,
-                            postalCode: result.address.postalCode
-                        } : null,
-                        patients: result.patients
+                        emailAddresses: [...result.emailAddresses],
+                        phoneNumbers: [...result.phoneNumbers],
+                        address: {...result.address },
+                        patients: result.patients?.map(patient => {return {...patient};})
                     });
 
                 });
@@ -203,6 +163,6 @@ class PracticeProvider {
             });
         });
     }
-};
+}
 
 module.exports = PracticeProvider;

@@ -8,5 +8,6 @@ export interface IPatient {
     owners: IOwner[],
     isBloodDonor: Boolean,
     bloodType: string,
-    practiceId: string
+    practiceId: string,
+    comments: Comment[]
 }

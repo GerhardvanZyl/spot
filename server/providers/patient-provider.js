@@ -21,7 +21,8 @@ class PatientProvider {
                             isBloodDonor: res.isBloodDonor,
                             bloodType: res.bloodType,
                             practiceId: res.practiceId,
-                            lastBloodDonationDate: res.lastBloodDonationDate
+                            lastBloodDonationDate: res.lastBloodDonationDate,
+                            //comments: res.comments?.map(comment => { return {...comment};})
                         });
                     }
 
@@ -48,7 +49,8 @@ class PatientProvider {
                             isBloodDonor: result.isBloodDonor,
                             bloodType: result.bloodType,
                             practiceId: result.practiceId,
-                            lastBloodDonationDate: result.lastBloodDonationDate
+                            lastBloodDonationDate: result.lastBloodDonationDate,
+                            //comments: result.comments?.map(comment => { return {...comment};})
                         });
                     } else {
                         resolve(null);
@@ -86,7 +88,8 @@ class PatientProvider {
                                     isBloodDonor: res.isBloodDonor,
                                     bloodType: res.bloodType,
                                     practiceId: res.practiceId,
-                                    lastBloodDonationDate: res.lastBloodDonationDate
+                                    lastBloodDonationDate: res.lastBloodDonationDate,
+                                    //comments: res.comments?.map(comment => { return {...comment};})
                                 });
                             }
 
@@ -106,21 +109,23 @@ class PatientProvider {
             return new Promise((resolve, reject) => {
                 let query = PatientModel.findById(patient.id);
 
-                query.exec((err, result) => {
-                    result.name = patient.name;
-                    result.surname = patient.surname;
-                    result.owners = patient.owners;
-                    result.isBloodDonor = patient.isBloodDonor;
-                    result.bloodType = patient.bloodType;
-                    result.practiceId = patient.practiceId;
-                    result.emailAddresses = patient.emailAddresses;
-                    result.phoneNumbers = patient.phoneNumbers;
-                    result.lastBloodDonationDate = patient.lastBloodDonationDate
+                query.exec((err, queryResult) => {
+                    queryResult.name = patient.name;
+                    queryResult.surname = patient.surname;
+                    queryResult.owners = patient.owners;
+                    queryResult.isBloodDonor = patient.isBloodDonor;
+                    queryResult.bloodType = patient.bloodType;
+                    queryResult.practiceId = patient.practiceId;
+                    queryResult.emailAddresses = patient.emailAddresses;
+                    queryResult.phoneNumbers = patient.phoneNumbers;
+                    queryResult.lastBloodDonationDate = patient.lastBloodDonationDate;
+                    //queryResult.comments = patient.comments && patient.comments.length > 0 ? patient.comments : [];
 
-                    result.save((err, result) => {
+                    queryResult.save((err, result) => {
 
                         if (err) {
                             reject(err);
+                            return;
                         }
     
                         resolve({

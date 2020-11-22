@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const ownerSchema = require('./owner.js');
+const commentSchema = require('./comment.js');
 
 const patientSchema = new mongoose.Schema({
     name: {type: String},
@@ -8,7 +9,8 @@ const patientSchema = new mongoose.Schema({
     isBloodDonor: {type: Boolean},
     bloodType: {type: String},
     practiceId: {type: String},
-    lastBloodDonationDate: {type: Date}
+    lastBloodDonationDate: {type: Date},
+    comments: [commentSchema]
 });
 
-module.exports = PatientModel = mongoose.model('Patient', patientSchema);
+module.exports = mongoose.model('Patient', patientSchema);

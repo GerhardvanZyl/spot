@@ -1,13 +1,10 @@
 const express = require('express');
-const PatienteModel = require('../model/practice.js');
 const PatientProvider = require('../providers/patient-provider');
 const authProvivder = require('../providers/auth-povider.js');
-const passport = require('passport');
-const patient = require('../model/patient.js');
 
 const router = express.Router();
 
-router.get('/', authProvivder.authenticationCheck, async (req, res, next) => {
+router.get('/', authProvivder.authenticationCheck, async (req, res) => {
     const patientProvider = new PatientProvider();
     try {
         let patients = await patientProvider.retrieveAll();
@@ -18,7 +15,7 @@ router.get('/', authProvivder.authenticationCheck, async (req, res, next) => {
     }
 });
 
-router.get('/id/:id', authProvivder.authenticationCheck, async (req, res, next) => {
+router.get('/id/:id', authProvivder.authenticationCheck, async (req, res) => {
     const patientProvider = new PatientProvider();
     try {
         let patients = await patientProvider.findById(req.params['id']);
@@ -31,7 +28,7 @@ router.get('/id/:id', authProvivder.authenticationCheck, async (req, res, next) 
     }
 });
 
-router.get('/:key/:value',  authProvivder.authenticationCheck, async (req, res, next) => {
+router.get('/:key/:value',  authProvivder.authenticationCheck, async (req, res) => {
     const patientProvider = new PatientProvider();
     try {
         let patients = await patientProvider.findByProperty(req.params['key'], req.params['value']);
@@ -44,18 +41,19 @@ router.get('/:key/:value',  authProvivder.authenticationCheck, async (req, res, 
     }
 });
 
-router.post('/', authProvivder.authenticationCheck, async (req, res, next) => {
+router.post('/', authProvivder.authenticationCheck, async (req, res) => {
     const patientProvider = new PatientProvider();
     try {
         let result = await patientProvider.save({
             id: req.body.id,
             name: req.body.name,
             surname: req.body.surname,
-            owners: req.body.owners,
+            owners: req.body.owners.map(owner => { return {...owner};}),
             isBloodDonor: req.body.isBloodDonor,
             bloodType: req.body.bloodType,
             practiceId: req.body.practiceId,
-            lastBloodDonationDate: req.body.lastBloodDonationDate
+            lastBloodDonationDate: req.body.lastBloodDonationDate,
+            comments: req.body.comments.map(comment => {return {...comment};})
         });
 
         res.status(200).json(result);
@@ -66,7 +64,7 @@ router.post('/', authProvivder.authenticationCheck, async (req, res, next) => {
     }
 });
 
-router.delete('/id/:id', authProvivder.authenticationCheck, async (req, res, next) => {
+router.delete('/id/:id', authProvivder.authenticationCheck, async (req, res) => {
     const patientProvider = new PatientProvider();
     try {
         let result = await patientProvider.delete(req.params['id']);
